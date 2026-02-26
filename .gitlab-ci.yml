@@ -3,10 +3,11 @@ image: alpine:latest
 
 pages:
   stage: deploy
+  before_script:
+    - apk add --no-cache rsync
   script:
-    # Копируем все файлы в папку public
-    - mkdir public
-    - cp -r ./* public/
+    # Копируем все файлы кроме .git и public
+    - rsync -av --exclude='.git' --exclude='public' --exclude='.gitlab-ci.yml' ./ public/
   artifacts:
     paths:
       - public
