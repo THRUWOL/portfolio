@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>404 | Страница не найдена</title>
+    <meta name="description" content="Страница не найдена">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #252526;
+            --text-primary: #d4d4d4;
+            --text-secondary: #abb2bf;
+            --text-muted: #858585;
+            --accent-java: #e76f00;
+            --accent-spring: #6db33f;
+            --accent-blue: #569cd6;
+            --accent-purple: #c586c0;
+            --accent-yellow: #dcdcaa;
+            --border-color: #3e3e42;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-java), var(--accent-spring));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f56; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #27ca40; }
+
+        .code-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .code-line {
+            display: block;
+        }
+
+        .code-line .keyword { color: var(--accent-purple); }
+        .code-line .class { color: var(--accent-yellow); }
+        .code-line .method { color: var(--accent-blue); }
+        .code-line .string { color: var(--accent-spring); }
+        .code-line .comment { color: var(--text-muted); font-style: italic; }
+
+        .btn-primary {
+            background: var(--accent-spring);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #5a9a3a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 179, 63, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer a {
+            color: var(--accent-spring);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-code,
+        .error-title,
+        .error-message,
+        .code-block {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .error-title { animation-delay: 0.1s; }
+        .error-message { animation-delay: 0.2s; }
+        .code-block { animation-delay: 0.3s; }
+        .btn-primary { animation-delay: 0.4s; }
+
+        .btn-primary {
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.2rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Страница не найдена</h1>
+        <p class="error-message">
+            Похоже, вы перешли по несуществующей ссылке.<br>
+            Не волнуйтесь, даже у лучших разработчиков бывает null pointer exception.
+        </p>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+            </div>
+            <div class="code-content">
+                <span class="code-line"><span class="keyword">if</span> (page == <span class="keyword">null</span>) {</span>
+                <span class="code-line">&nbsp;&nbsp;<span class="comment">// 404 - Page Not Found</span></span>
+                <span class="code-line">&nbsp;<span class="keyword">return</span> <span class="keyword">new</span> <span class="class">NotFoundPage</span>();</span>
+                <span class="code-line">}</span>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-primary">
+            <span>🏠</span> Вернуться на главную
+        </a>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Ярош Никита. Java Backend Developer</p>
+        <p><a href="http://t.me/YaroshNikita" target="_blank">Telegram</a> • <a href="mailto:yarosh.nv@yandex.ru">Email</a></p>
+    </footer>
+</body>
+</html>
