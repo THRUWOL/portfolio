@@ -1,0 +1,14 @@
+# GitLab CI/CD для деплоя на GitLab Pages
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+    # Копируем все файлы в папку public
+    - mkdir public
+    - cp -r ./* public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
