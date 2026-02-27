@@ -234,7 +234,7 @@ const CODE_LINES = [
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setAge</span>(<span class="number">23</span>);', delay: 1200 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setStack</span>(', delay: 1500 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Java 21"</span>, <span class="string">"Spring Boot"</span>,', delay: 1800 },
-    { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostgreSQL"</span>, <span class="string">"Kafka"</span>, <span class="string">"AI/ML"</span>', delay: 2100 },
+    { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostgreSQL"</span>, <span class="string"><span class="string">"AI/ML"</span>', delay: 2100 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;);', delay: 2400 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setExperience</span>(<span class="string">"3+ года"</span>);', delay: 2700 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Open for freelance opportunities</span>', delay: 3000 },
