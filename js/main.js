@@ -1,49 +1,90 @@
 /* ============================================
+   CONFIGURATION CONSTANTS
+   ============================================ */
+const CONFIG = {
+    SCROLL_THRESHOLD: 500,
+    HEADER_SCROLL_THRESHOLD: 50,
+    HEADER_HEIGHT: 70,
+    ACTIVE_SECTION_OFFSET: 100,
+    STORAGE_KEYS: {
+        THEME: 'theme'
+    },
+    THEMES: {
+        DARK: 'dark',
+        LIGHT: 'light'
+    },
+    SELECTORS: {
+        EMAIL_LINK: 'emailLink',
+        THEME_TOGGLE: 'themeToggle',
+        MOBILE_MENU_BTN: 'mobile-menu-btn',
+        NAV_LINKS: 'nav-links',
+        HAMBURGER: 'hamburger',
+        NAV_ACTIONS: 'nav-actions',
+        READING_PROGRESS: 'readingProgress',
+        BACK_TO_TOP: 'backToTop',
+        TYPEWRITER_CODE: 'typewriterCode'
+    },
+    CLASSES: {
+        ACTIVE: 'active',
+        VISIBLE: 'visible',
+        SCROLLED: 'scrolled',
+        COPIED: 'copied'
+    },
+    EMAIL: 'yarosh.nv@yandex.ru'
+};
+
+/* ============================================
    THEME TOGGLE
    ============================================ */
-const themeToggle = document.getElementById('themeToggle');
-const htmlElement = document.documentElement;
+function initThemeToggle() {
+    const themeToggle = document.getElementById(CONFIG.SELECTORS.THEME_TOGGLE);
+    const htmlElement = document.documentElement;
 
-// Load saved theme or default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';
-htmlElement.setAttribute('data-theme', savedTheme);
+    if (!themeToggle) return;
 
-// Toggle theme on button click
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    // Add transition class for smooth theme change
-    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-    setTimeout(() => {
-        document.body.style.transition = '';
-    }, 300);
-});
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME) || CONFIG.THEMES.DARK;
+    htmlElement.setAttribute('data-theme', savedTheme);
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === CONFIG.THEMES.DARK ? CONFIG.THEMES.LIGHT : CONFIG.THEMES.DARK;
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, newTheme);
+
+        // Add transition class for smooth theme change
+        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    });
+}
 
 /* ============================================
    MOBILE MENU TOGGLE
    ============================================ */
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
-const hamburger = document.querySelector('.hamburger');
-const navActions = document.querySelector('.nav-actions');
+function initMobileMenu() {
+    const mobileMenuBtn = document.querySelector(`.${CONFIG.SELECTORS.MOBILE_MENU_BTN}`);
+    const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
+    const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
+    const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
 
-if (mobileMenuBtn) {
+    if (!mobileMenuBtn) return;
+
     mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        navActions.classList.toggle('active');
+        navLinks.classList.toggle(CONFIG.CLASSES.ACTIVE);
+        hamburger.classList.toggle(CONFIG.CLASSES.ACTIVE);
+        navActions.classList.toggle(CONFIG.CLASSES.ACTIVE);
     });
 
     // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll(`.${CONFIG.SELECTORS.NAV_LINKS} a`).forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-            navActions.classList.remove('active');
+            navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
+            hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
+            navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
         });
     });
 }
@@ -51,11 +92,10 @@ if (mobileMenuBtn) {
 /* ============================================
    ACTIVE SECTION INDICATOR
    ============================================ */
-const sections = document.querySelectorAll('section[id]');
-const navLinksItems = document.querySelectorAll('.nav-links a');
-
 function setActiveSection() {
-    const scrollPos = window.scrollY + 100;
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    const scrollPos = window.scrollY + CONFIG.ACTIVE_SECTION_OFFSET;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -64,54 +104,54 @@ function setActiveSection() {
 
         if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
             navLinksItems.forEach(link => {
-                link.classList.remove('active');
+                link.classList.remove(CONFIG.CLASSES.ACTIVE);
                 if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
+                    link.classList.add(CONFIG.CLASSES.ACTIVE);
                 }
             });
         }
     });
 }
 
-window.addEventListener('scroll', setActiveSection);
-setActiveSection(); // Run on page load
-
 /* ============================================
    SMOOTH SCROLL FOR ANCHOR LINKS
    ============================================ */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        
-        // Skip if it's just "#" or external link
-        if (href === '#' || !href.startsWith('#')) return;
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+
+            // Skip if it's just "#" or external link
+            if (href === '#' || !href.startsWith('#')) return;
+
+            e.preventDefault();
+            const target = document.querySelector(href);
+
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
-});
+}
 
 /* ============================================
    EMAIL COPY FUNCTIONALITY
    ============================================ */
-const emailLink = document.getElementById('emailLink');
+function initEmailCopy() {
+    const emailLink = document.getElementById(CONFIG.SELECTORS.EMAIL_LINK);
 
-if (emailLink) {
+    if (!emailLink) return;
+
     emailLink.addEventListener('click', function(e) {
         e.preventDefault();
-        const email = 'yarosh.nv@yandex.ru';
-        
-        navigator.clipboard.writeText(email).then(() => {
-            this.classList.add('copied');
+
+        navigator.clipboard.writeText(CONFIG.EMAIL).then(() => {
+            this.classList.add(CONFIG.CLASSES.COPIED);
             setTimeout(() => {
-                this.classList.remove('copied');
+                this.classList.remove(CONFIG.CLASSES.COPIED);
             }, 2000);
         }).catch(err => {
             console.error('Failed to copy email:', err);
@@ -122,81 +162,71 @@ if (emailLink) {
 /* ============================================
    FADE-IN ANIMATION ON SCROLL
    ============================================ */
-const fadeElements = document.querySelectorAll('.fade-in');
+function initFadeInAnimation() {
+    const fadeElements = document.querySelectorAll('.fade-in');
 
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add(CONFIG.CLASSES.VISIBLE);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
     });
-}, observerOptions);
-
-fadeElements.forEach(element => {
-    observer.observe(element);
-});
-
-/* ============================================
-   HEADER SCROLL EFFECT
-   ============================================ */
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
+}
 
 /* ============================================
    READING PROGRESS BAR
    ============================================ */
-const readingProgress = document.getElementById('readingProgress');
-
 function updateReadingProgress() {
+    const readingProgress = document.getElementById(CONFIG.SELECTORS.READING_PROGRESS);
+    if (!readingProgress) return;
+
     const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (window.scrollY / windowHeight) * 100;
     readingProgress.style.width = scrolled + '%';
 }
 
-window.addEventListener('scroll', updateReadingProgress);
-updateReadingProgress();
-
 /* ============================================
    BACK TO TOP BUTTON
    ============================================ */
-const backToTop = document.getElementById('backToTop');
+function initBackToTop() {
+    const backToTop = document.getElementById(CONFIG.SELECTORS.BACK_TO_TOP);
+    if (!backToTop) return;
 
-function toggleBackToTop() {
-    if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
+    function toggleBackToTop() {
+        if (window.scrollY > CONFIG.SCROLL_THRESHOLD) {
+            backToTop.classList.add(CONFIG.CLASSES.VISIBLE);
+        } else {
+            backToTop.classList.remove(CONFIG.CLASSES.VISIBLE);
+        }
     }
-}
 
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
 
-window.addEventListener('scroll', toggleBackToTop);
-toggleBackToTop();
+    window.addEventListener('scroll', toggleBackToTop);
+    toggleBackToTop();
+}
 
 /* ============================================
    TYPEWRITER EFFECT FOR CODE BLOCK
    ============================================ */
-const codeLines = [
+const CODE_LINES = [
     { text: '<span class="keyword">public class</span> <span class="class">Developer</span> {', delay: 0 },
     { text: '&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="method">main</span>(String[] args) {', delay: 300 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="class">Developer</span> nikita = <span class="keyword">new</span> <span class="class">Developer</span>();', delay: 600 },
@@ -212,36 +242,34 @@ const codeLines = [
     { text: '}', delay: 3600 }
 ];
 
-const typewriterContainer = document.getElementById('typewriterCode');
-let hasAnimated = false;
-
 function typeCode() {
-    if (hasAnimated) return;
-    hasAnimated = true;
+    const typewriterContainer = document.getElementById(CONFIG.SELECTORS.TYPEWRITER_CODE);
+    if (!typewriterContainer || typewriterContainer.dataset.animated === 'true') return;
     
+    typewriterContainer.dataset.animated = 'true';
     typewriterContainer.innerHTML = '';
-    
-    codeLines.forEach((line, lineIndex) => {
+
+    CODE_LINES.forEach((line, lineIndex) => {
         setTimeout(() => {
             const lineElement = document.createElement('span');
             lineElement.className = 'code-line';
             typewriterContainer.appendChild(lineElement);
-            
+
             // Add cursor to current line
-            if (lineIndex === codeLines.length - 1) {
+            if (lineIndex === CODE_LINES.length - 1) {
                 lineElement.classList.add('typing-cursor');
             }
-            
+
             // Type character by character
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = line.text;
             const htmlContent = tempDiv.innerHTML;
-            
+
             // For HTML content, we need to insert the full HTML at once
             // but animate the visibility
             let currentHtml = '';
             const htmlTags = htmlContent.match(/<[^>]*>[^<]*<\/[^>]*>|<[^>]*>|[^<]+/g) || [htmlContent];
-            
+
             let tagIndex = 0;
             const typeTag = () => {
                 if (tagIndex < htmlTags.length) {
@@ -255,49 +283,120 @@ function typeCode() {
                     if (prevLine) {
                         prevLine.classList.remove('typing-cursor');
                     }
-                    
+
                     // Add cursor to this line if it's the last one
-                    if (lineIndex === codeLines.length - 1) {
+                    if (lineIndex === CODE_LINES.length - 1) {
                         lineElement.classList.add('typing-cursor');
                     }
                 }
             };
-            
+
             typeTag();
         }, line.delay);
     });
 }
 
-// Start typing when the hero section is visible
-const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-            typeCode();
-        }
-    });
-}, { threshold: 0.3 });
+function initTypewriter() {
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection) return;
 
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                typeCode();
+            }
+        });
+    }, { threshold: 0.3 });
+
     heroObserver.observe(heroSection);
 }
 
 /* ============================================
    KEYBOARD NAVIGATION
    ============================================ */
-document.addEventListener('keydown', (e) => {
-    // Close mobile menu on Escape
-    if (e.key === 'Escape') {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
+function initKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        // Close mobile menu on Escape
+        if (e.key === 'Escape') {
+            const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
+            const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
+            const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
+            
+            if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
+            if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
+            if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+        }
+    });
+}
+
+/* ============================================
+   COMBINED SCROLL HANDLER
+   ============================================ */
+function handleScroll() {
+    // Header scroll effect
+    const header = document.querySelector('.header');
+    if (header) {
+        if (window.scrollY > CONFIG.HEADER_SCROLL_THRESHOLD) {
+            header.classList.add(CONFIG.CLASSES.SCROLLED);
+        } else {
+            header.classList.remove(CONFIG.CLASSES.SCROLLED);
+        }
     }
-});
+
+    // Update reading progress
+    updateReadingProgress();
+
+    // Update active section
+    setActiveSection();
+
+    // Back to top button visibility
+    const backToTop = document.getElementById(CONFIG.SELECTORS.BACK_TO_TOP);
+    if (backToTop) {
+        if (window.scrollY > CONFIG.SCROLL_THRESHOLD) {
+            backToTop.classList.add(CONFIG.CLASSES.VISIBLE);
+        } else {
+            backToTop.classList.remove(CONFIG.CLASSES.VISIBLE);
+        }
+    }
+}
 
 /* ============================================
    CONSOLE EASTER EGG
    ============================================ */
-console.log('%c👋 Привет, разработчик!', 'color: #6db33f; font-size: 20px; font-weight: bold;');
-console.log('%cИщешь код этого сайта? CSS в /css/style.css, JS в /js/main.js', 'color: #abb2bf; font-size: 14px;');
-console.log('%c☕ Java 21 | 🌱 Spring Boot | 🤖 AI/ML', 'color: #e76f00; font-size: 14px;');
-console.log('%c🌓 Попробуй переключить тему (кнопка справа в хедере)!', 'color: #569cd6; font-size: 14px;');
-console.log('%c📊 Progress bar сверху показывает сколько ты уже прочитал!', 'color: #4ec9b0; font-size: 14px;');
+function logEasterEgg() {
+    console.log('%c👋 Привет, разработчик!', 'color: #6db33f; font-size: 20px; font-weight: bold;');
+    console.log('%cИщешь код этого сайта? CSS в /css/style.css, JS в /js/main.js', 'color: #abb2bf; font-size: 14px;');
+    console.log('%c☕ Java 21 | 🌱 Spring Boot | 🤖 AI/ML', 'color: #e76f00; font-size: 14px;');
+    console.log('%c🌓 Попробуй переключить тему (кнопка справа в хедере)!', 'color: #569cd6; font-size: 14px;');
+    console.log('%c📊 Progress bar сверху показывает сколько ты уже прочитал!', 'color: #4ec9b0; font-size: 14px;');
+}
+
+/* ============================================
+   INITIALIZATION
+   ============================================ */
+function init() {
+    // Initialize all modules
+    initThemeToggle();
+    initMobileMenu();
+    initSmoothScroll();
+    initEmailCopy();
+    initFadeInAnimation();
+    initBackToTop();
+    initTypewriter();
+    initKeyboardNavigation();
+    logEasterEgg();
+
+    // Single scroll event listener for all scroll-based functionality
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Initial call to set correct state on page load
+    handleScroll();
+    setActiveSection();
+}
+
+// Run initialization when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
