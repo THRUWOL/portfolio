@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1e1e"/>
+      <stop offset="100%" style="stop-color:#252526"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e76f00"/>
+      <stop offset="100%" style="stop-color:#6db33f"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Code pattern background -->
+  <g opacity="0.1">
+    <rect x="50" y="100" width="400" height="20" fill="#6db33f" rx="4"/>
+    <rect x="50" y="140" width="300" height="20" fill="#6db33f" rx="4"/>
+    <rect x="50" y="180" width="350" height="20" fill="#6db33f" rx="4"/>
+    <rect x="50" y="220" width="280" height="20" fill="#6db33f" rx="4"/>
+  </g>
+  
+  <!-- Main content -->
+  <g transform="translate(600, 315)">
+    <!-- Logo -->
+    <text x="-280" y="-120" font-family="monospace" font-size="48" fill="#e76f00">&lt;/&gt;</text>
+    
+    <!-- Name -->
+    <text x="-280" y="-40" font-family="monospace" font-size="32" font-weight="bold" fill="#d4d4d4">ЯРОШ НИКИТА</text>
+    
+    <!-- Title -->
+    <text x="-280" y="20" font-family="monospace" font-size="56" font-weight="bold" fill="#6db33f">JAVA BACKEND</text>
+    <text x="-280" y="90" font-family="monospace" font-size="56" font-weight="bold" fill="#6db33f">DEVELOPER</text>
+    
+    <!-- Skills badges -->
+    <g transform="translate(-280, 150)">
+      <rect x="0" y="-30" width="140" height="50" fill="#e76f00" fill-opacity="0.2" rx="25"/>
+      <text x="70" y="5" font-family="monospace" font-size="20" fill="#e76f00" text-anchor="middle">☕ Java 21</text>
+      
+      <rect x="160" y="-30" width="180" height="50" fill="#6db33f" fill-opacity="0.2" rx="25"/>
+      <text x="250" y="5" font-family="monospace" font-size="20" fill="#6db33f" text-anchor="middle">🌱 Spring Boot</text>
+      
+      <rect x="360" y="-30" width="160" height="50" fill="#569cd6" fill-opacity="0.2" rx="25"/>
+      <text x="440" y="5" font-family="monospace" font-size="20" fill="#569cd6" text-anchor="middle">⚡ Highload</text>
+      
+      <rect x="540" y="-30" width="180" height="50" fill="#c586c0" fill-opacity="0.2" rx="25"/>
+      <text x="630" y="5" font-family="monospace" font-size="20" fill="#c586c0" text-anchor="middle">🤖 AI/ML</text>
+    </g>
+  </g>
+  
+  <!-- Bottom accent line -->
+  <rect x="0" y="600" width="1200" height="30" fill="url(#accent)"/>
+</svg>
