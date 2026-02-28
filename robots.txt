@@ -10,6 +10,7 @@ Sitemap: https://yaroshnikita.ru/sitemap.xml
 # Crawl-delay for polite crawling (optional)
 Crawl-delay: 1
 
-# Disallow admin/private directories (if any in future)
-# Disallow: /admin/
-# Disallow: /private/
+# Disallow PDF files from being indexed directly
+Disallow: /*.pdf$
+Disallow: /Сертификаты/
+Disallow: /certificates/

@@ -70,14 +70,32 @@ function initMobileMenu() {
     const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
     const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
     const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
+    const overlay = document.getElementById('mobileOverlay');
 
     if (!mobileMenuBtn) return;
 
-    mobileMenuBtn.addEventListener('click', () => {
+    function toggleMenu() {
         navLinks.classList.toggle(CONFIG.CLASSES.ACTIVE);
         hamburger.classList.toggle(CONFIG.CLASSES.ACTIVE);
         navActions.classList.toggle(CONFIG.CLASSES.ACTIVE);
-    });
+        overlay.classList.toggle(CONFIG.CLASSES.ACTIVE);
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = navLinks.classList.contains(CONFIG.CLASSES.ACTIVE) ? 'hidden' : '';
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking overlay
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
+            hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
+            navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+            overlay.classList.remove(CONFIG.CLASSES.ACTIVE);
+            document.body.style.overflow = '';
+        });
+    }
 
     // Close menu when clicking on a link
     document.querySelectorAll(`.${CONFIG.SELECTORS.NAV_LINKS} a`).forEach(link => {
@@ -85,6 +103,8 @@ function initMobileMenu() {
             navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
             hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
             navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+            overlay.classList.remove(CONFIG.CLASSES.ACTIVE);
+            document.body.style.overflow = '';
         });
     });
 }
@@ -312,6 +332,44 @@ function initTypewriter() {
 }
 
 /* ============================================
+   LAZY LOADING FOR IMAGES
+   ============================================ */
+function initLazyLoading() {
+    const lazyImages = document.querySelectorAll('img.lazy');
+    
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for browsers without IntersectionObserver
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        });
+        return;
+    }
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.onload = () => img.classList.add('loaded');
+                    img.onerror = () => img.classList.add('loaded');
+                }
+                
+                if (img.dataset.srcset) {
+                    img.srcset = img.dataset.srcset;
+                }
+                
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: '50px 0px' });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+}
+
+/* ============================================
    KEYBOARD NAVIGATION
    ============================================ */
 function initKeyboardNavigation() {
@@ -381,6 +439,7 @@ function init() {
     initSmoothScroll();
     initEmailCopy();
     initFadeInAnimation();
+    initLazyLoading();
     initBackToTop();
     initTypewriter();
     initKeyboardNavigation();
