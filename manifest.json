@@ -1,0 +1,28 @@
+{
+    "name": "Ярош Никита | Java Backend Developer Portfolio",
+    "short_name": "Никита Ярош",
+    "description": "Портфолио Java Backend разработчика с 3+ годами опыта. Spring Boot, Highload, AI/ML интеграции.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#1e1e1e",
+    "theme_color": "#6db33f",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "assets/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "productivity", "utilities"],
+    "lang": "ru-RU",
+    "dir": "ltr",
+    "author": "Ярош Никита",
+    "url": "https://yaroshnikita.online",
+    "image": "assets/og-preview.svg",
+    "sameAs": [
+        "https://t.me/YaroshNikita",
+        "https://github.com/yarosh-nv"
+    ]
+}

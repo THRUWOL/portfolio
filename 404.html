@@ -14,6 +14,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Local font fallbacks if Google Fonts is unavailable */
+        @font-face {
+            font-family: 'JetBrains Mono Fallback';
+            src: local('Consolas'), local('Monaco'), local('Courier New'), monospace;
+        }
+        @font-face {
+            font-family: 'Inter Fallback';
+            src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial'), sans-serif;
+        }
+    </style>
     
     <style>
         :root {
@@ -239,7 +250,11 @@
 
     <footer class="footer">
         <p>© 2026 Ярош Никита. Java Backend Developer</p>
-        <p><a href="https://t.me/YaroshNikita" target="_blank" rel="noopener">Telegram</a> • <a href="mailto:yarosh.nv@yandex.ru">Email</a></p>
+        <p>
+            <a href="https://t.me/YaroshNikita" target="_blank" rel="noopener">Telegram</a> • 
+            <a href="mailto:yarosh.nv@yandex.ru">Email</a> • 
+            <a href="https://github.com/yarosh-nv" target="_blank" rel="noopener">GitHub</a>
+        </p>
     </footer>
 </body>
 </html>

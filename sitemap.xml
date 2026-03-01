@@ -6,26 +6,26 @@
 
     <!-- Main Page -->
     <url>
-        <loc>https://yaroshnikita.ru/</loc>
-        <lastmod>2026-02-27</lastmod>
+        <loc>https://yaroshnikita.online/</loc>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <!-- 404 Page (optional, but good for completeness) -->
     <url>
-        <loc>https://yaroshnikita.ru/404.html</loc>
-        <lastmod>2026-02-27</lastmod>
+        <loc>https://yaroshnikita.online/404.html</loc>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.1</priority>
     </url>
 
     <!-- PDF Resume -->
     <url>
-        <loc>https://yaroshnikita.ru/Ярош%20Никита%20Валерьевич.pdf</loc>
-        <lastmod>2026-02-27</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
+        <loc>https://yaroshnikita.online/a7f3e9d2_resume.pdf</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
 
 </urlset>

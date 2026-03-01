@@ -2,10 +2,12 @@
    CONFIGURATION CONSTANTS
    ============================================ */
 const CONFIG = {
-    SCROLL_THRESHOLD: 500,
-    HEADER_SCROLL_THRESHOLD: 50,
+    // Scroll thresholds (pixels)
+    SCROLL_THRESHOLD: 500,              // Показ кнопки "наверх" после этого значения
+    HEADER_SCROLL_THRESHOLD: 50,        // Порог для тени хедера
     HEADER_HEIGHT: 70,
-    ACTIVE_SECTION_OFFSET: 100,
+    ACTIVE_SECTION_OFFSET: 100,         // Смещение для определения активной секции
+
     STORAGE_KEYS: {
         THEME: 'theme'
     },
@@ -30,7 +32,21 @@ const CONFIG = {
         SCROLLED: 'scrolled',
         COPIED: 'copied'
     },
-    EMAIL: 'yarosh.nv@yandex.ru'
+
+    // ============================================
+    // CONTACT INFORMATION (update in one place)
+    // ============================================
+    CONTACT: {
+        EMAIL: 'yarosh.nv@yandex.ru',
+        TELEGRAM: 'https://t.me/YaroshNikita',
+        GITHUB: 'https://github.com/yarosh-nv',
+        PHONE: '+7-978-853-28-36',
+        NAME: 'Ярош Никита',
+        POSITION: 'Java Backend Developer'
+    },
+
+    // File versions for cache busting
+    VERSION: '1.0.0'
 };
 
 /* ============================================
@@ -115,6 +131,9 @@ function initMobileMenu() {
 function setActiveSection() {
     const sections = document.querySelectorAll('section[id]');
     const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    if (!sections.length || !navLinksItems.length) return;
+
     const scrollPos = window.scrollY + CONFIG.ACTIVE_SECTION_OFFSET;
 
     sections.forEach(section => {
@@ -163,12 +182,15 @@ function initSmoothScroll() {
 function initEmailCopy() {
     const emailLink = document.getElementById(CONFIG.SELECTORS.EMAIL_LINK);
 
-    if (!emailLink) return;
+    if (!emailLink) {
+        console.warn('Email link element not found');
+        return;
+    }
 
     emailLink.addEventListener('click', function(e) {
         e.preventDefault();
 
-        navigator.clipboard.writeText(CONFIG.EMAIL).then(() => {
+        navigator.clipboard.writeText(CONFIG.CONTACT.EMAIL).then(() => {
             this.classList.add(CONFIG.CLASSES.COPIED);
             setTimeout(() => {
                 this.classList.remove(CONFIG.CLASSES.COPIED);
@@ -336,7 +358,9 @@ function initTypewriter() {
    ============================================ */
 function initLazyLoading() {
     const lazyImages = document.querySelectorAll('img.lazy');
-    
+
+    if (!lazyImages.length) return;
+
     if (!('IntersectionObserver' in window)) {
         // Fallback for browsers without IntersectionObserver
         lazyImages.forEach(img => {
@@ -350,17 +374,17 @@ function initLazyLoading() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                
+
                 if (img.dataset.src) {
                     img.src = img.dataset.src;
                     img.onload = () => img.classList.add('loaded');
                     img.onerror = () => img.classList.add('loaded');
                 }
-                
+
                 if (img.dataset.srcset) {
                     img.srcset = img.dataset.srcset;
                 }
-                
+
                 observer.unobserve(img);
             }
         });

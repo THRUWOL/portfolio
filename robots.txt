@@ -1,16 +1,18 @@
-# robots.txt for yaroshnikita.ru
+# robots.txt for yaroshnikita.online
 # Allows all search engines to crawl the entire site
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://yaroshnikita.ru/sitemap.xml
+Sitemap: https://yaroshnikita.online/sitemap.xml
 
 # Crawl-delay for polite crawling (optional)
 Crawl-delay: 1
 
-# Disallow PDF files from being indexed directly
-Disallow: /*.pdf$
+# Disallow PDF files from being indexed directly (except resume)
 Disallow: /Сертификаты/
 Disallow: /certificates/
+
+# Allow resume PDF to be indexed
+Allow: /*_resume.pdf$
