@@ -154,8 +154,32 @@
     <!-- Skip to Content Link -->
     <a href="#main-content" class="skip-to-content">Перейти к контенту</a>
 
-    <!-- Reading Progress Bar -->
+    <!-- Decorative Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="bg-gradient-orb bg-orb-1"></div>
+    <div class="bg-gradient-orb bg-orb-2"></div>
+    <div class="bg-gradient-orb bg-orb-3"></div>
+    <div class="floating-icons">
+        <span class="floating-icon">☕</span>
+        <span class="floating-icon">🌱</span>
+        <span class="floating-icon">🐘</span>
+        <span class="floating-icon">🐳</span>
+        <span class="floating-icon">🔄</span>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
     <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- Scroll Dot Navigation -->
+    <nav class="scroll-dots" id="scrollDots" aria-label="Навигация по секциям">
+        <button class="scroll-dot active" data-section="about" aria-label="Обо мне" type="button"></button>
+        <button class="scroll-dot" data-section="competencies" aria-label="Компетенции" type="button"></button>
+        <button class="scroll-dot" data-section="experience" aria-label="Опыт работы" type="button"></button>
+        <button class="scroll-dot" data-section="stack" aria-label="Навыки" type="button"></button>
+        <button class="scroll-dot" data-section="education" aria-label="Образование" type="button"></button>
+        <button class="scroll-dot" data-section="certificates" aria-label="Сертификаты" type="button"></button>
+        <button class="scroll-dot" data-section="contact" aria-label="Контакты" type="button"></button>
+    </nav>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" type="button" aria-label="Наверх">↑</button>
@@ -251,6 +275,8 @@
         </div>
     </section>
 
+    <hr class="section-divider">
+
     <!-- Competencies Section -->
     <section class="competencies" id="competencies">
         <div class="container">
@@ -289,6 +315,8 @@
             </div>
         </div>
     </section>
+
+    <hr class="section-divider">
 
     <!-- Experience Section -->
     <section class="experience" id="experience">
@@ -414,6 +442,8 @@
         </div>
     </section>
 
+    <hr class="section-divider">
+
     <!-- Skills Section (Hard + Soft) -->
     <section class="skills" id="stack">
         <div class="container">
@@ -426,6 +456,47 @@
             <div class="skills-subtitle fade-in">
                 <h3>Hard Skills</h3>
             </div>
+
+            <!-- Key Skills Progress -->
+            <div class="skills-progress fade-in">
+                <div class="skill-progress-item">
+                    <div class="skill-progress-header">
+                        <span>Java</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" data-progress="90"></div>
+                    </div>
+                </div>
+                <div class="skill-progress-item">
+                    <div class="skill-progress-header">
+                        <span>Spring Boot</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" data-progress="85"></div>
+                    </div>
+                </div>
+                <div class="skill-progress-item">
+                    <div class="skill-progress-header">
+                        <span>PostgreSQL</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" data-progress="80"></div>
+                    </div>
+                </div>
+                <div class="skill-progress-item">
+                    <div class="skill-progress-header">
+                        <span>Docker/Kubernetes</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" data-progress="75"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="stack-groups">
                 <!-- Backend -->
                 <div class="stack-group fade-in">
@@ -550,6 +621,8 @@
         </div>
     </section>
 
+    <hr class="section-divider">
+
     <!-- Education Section -->
     <section class="education" id="education">
         <div class="container">
@@ -581,6 +654,8 @@
             </div>
         </div>
     </section>
+
+    <hr class="section-divider">
 
     <!-- Certificates Section -->
     <section class="certificates" id="certificates">
@@ -699,11 +774,30 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
-            <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
+            <div class="footer-info">
+                <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
+                <ul class="footer-social">
+                    <li>
+                        <a href="https://t.me/YaroshNikita" target="_blank" rel="noopener" aria-label="Telegram">
+                            ✈️
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/yarosh-nv" target="_blank" rel="noopener" aria-label="GitHub">
+                            🐙
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:yarosh.nv@yandex.ru" aria-label="Email">
+                            📧
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="footer-links">
-                <a href="https://t.me/YaroshNikita" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-                <a href="mailto:yarosh.nv@yandex.ru" aria-label="Email">Email</a>
-                <a href="https://github.com/yarosh-nv" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+                <a href="#about">Обо мне</a>
+                <a href="#experience">Опыт</a>
+                <a href="#contact">Контакты</a>
             </div>
         </div>
     </footer>

@@ -20,6 +20,8 @@
     --accent-purple: #c586c0;
     --accent-yellow: #dcdcaa;
     --accent-red: #f44747;
+    --accent-cyan: #4ec9b0;
+    --accent-pink: #d67ad2;
 
     --border-color: #3e3e42;
     --scrollbar-bg: #1e1e1e;
@@ -28,11 +30,14 @@
 
     --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.3);
     --shadow-glow: 0 0 20px rgba(78, 201, 176, 0.1);
-    --shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
+    --shadow-glow-spring: 0 0 30px rgba(109, 179, 63, 0.3);
+    --shadow-glow-java: 0 0 30px rgba(231, 111, 0, 0.3);
 
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --header-height: 70px;
 
@@ -45,6 +50,11 @@
     /* Mobile breakpoints */
     --mobile-breakpoint: 768px;
     --small-mobile-breakpoint: 576px;
+
+    /* Typography */
+    --font-size-h1: clamp(2.5rem, 5vw, 4rem);
+    --font-size-h2: clamp(2rem, 4vw, 3rem);
+    --font-size-h3: clamp(1.25rem, 2vw, 1.5rem);
 }
 
 /* Light Theme - IntelliJ IDEA Light */
@@ -66,6 +76,8 @@
     --accent-purple: #a068a0;
     --accent-yellow: #b8b85a;
     --accent-red: #d64a4a;
+    --accent-cyan: #3a9a8a;
+    --accent-pink: #a05aa0;
 
     --border-color: #e0e0e0;
     --scrollbar-bg: #f5f5f5;
@@ -74,7 +86,9 @@
 
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-glow: 0 0 20px rgba(61, 184, 154, 0.15);
-    --shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --shadow-glow-spring: 0 0 30px rgba(90, 154, 58, 0.3);
+    --shadow-glow-java: 0 0 30px rgba(201, 94, 0, 0.3);
 
     --code-bg: #f8f8f8;
     --code-comment: #999999;

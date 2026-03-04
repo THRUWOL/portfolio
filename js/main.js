@@ -228,6 +228,34 @@ function initFadeInAnimation() {
 }
 
 /* ============================================
+   SKILL PROGRESS BARS ANIMATION
+   ============================================ */
+function initSkillProgress() {
+    const progressBars = document.querySelectorAll('.skill-progress-fill');
+    if (progressBars.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const progress = progressBar.getAttribute('data-progress');
+                
+                // Animate the progress bar
+                setTimeout(() => {
+                    progressBar.style.width = progress + '%';
+                }, 200);
+
+                observer.unobserve(progressBar);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    progressBars.forEach(bar => {
+        observer.observe(bar);
+    });
+}
+
+/* ============================================
    READING PROGRESS BAR
    ============================================ */
 function updateReadingProgress() {
@@ -394,6 +422,52 @@ function initLazyLoading() {
 }
 
 /* ============================================
+   SCROLL DOT NAVIGATION
+   ============================================ */
+function initScrollDots() {
+    const scrollDots = document.querySelectorAll('.scroll-dot');
+    if (scrollDots.length === 0) return;
+
+    // Click handler for dots
+    scrollDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const sectionId = dot.getAttribute('data-section');
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Update active dot on scroll
+    function updateScrollDots() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 200;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                scrollDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === sectionId) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateScrollDots, { passive: true });
+    updateScrollDots();
+}
+
+/* ============================================
    KEYBOARD NAVIGATION
    ============================================ */
 function initKeyboardNavigation() {
@@ -403,7 +477,7 @@ function initKeyboardNavigation() {
             const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
             const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
             const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
-            
+
             if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
@@ -463,10 +537,12 @@ function init() {
     initSmoothScroll();
     initEmailCopy();
     initFadeInAnimation();
+    initSkillProgress();
     initLazyLoading();
     initBackToTop();
     initTypewriter();
     initKeyboardNavigation();
+    initScrollDots();
     logEasterEgg();
 
     // Single scroll event listener for all scroll-based functionality
