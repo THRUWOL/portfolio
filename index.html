@@ -264,48 +264,163 @@
 
     <hr class="section-divider">
 
-    <!-- Competencies Section -->
-    <section class="competencies" id="competencies">
+    <!-- Combined Competencies & Skills Section -->
+    <section class="expertise" id="expertise">
         <div class="container">
             <div class="section-title fade-in">
-                <h2>Компетенции</h2>
-                <p>Ключевые направления экспертизы</p>
+                <h2>Экспертиза</h2>
+                <p>Компетенции и технические навыки</p>
             </div>
-            <div class="competencies-grid">
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">🏦</div>
-                    <h3>Enterprise Backend</h3>
-                    <p>
+
+            <!-- Main Competencies -->
+            <div class="expertise-grid">
+                <!-- Enterprise Backend -->
+                <div class="expertise-card fade-in">
+                    <div class="expertise-card-header">
+                        <span class="expertise-icon">🏦</span>
+                        <h3>Enterprise Backend</h3>
+                    </div>
+                    <p class="expertise-description">
                         Высоконагруженные системы для финансового сектора.
                         Безопасность, микросервисы, работа с legacy-кодом.
-                        Опыт в Банке ВТБ — платформе ЦФА на базе Masterchain.
                     </p>
+                    <div class="expertise-tags">
+                        <span class="expertise-tag">Java 21</span>
+                        <span class="expertise-tag">Spring Boot</span>
+                        <span class="expertise-tag">Microservices</span>
+                        <span class="expertise-tag">Highload</span>
+                    </div>
                 </div>
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">🤖</div>
-                    <h3>AI Integration</h3>
-                    <p>
+
+                <!-- AI Integration -->
+                <div class="expertise-card fade-in">
+                    <div class="expertise-card-header">
+                        <span class="expertise-icon">🤖</span>
+                        <h3>AI Integration</h3>
+                    </div>
+                    <p class="expertise-description">
                         Интеграция LLM-моделей в бизнес-процессы.
-                        Python, PyTorch, Hugging Face.
-                        Создание AI-систем для генерации ТЗ и автоматизации.
+                        AI-системы для генерации ТЗ и автоматизации.
                     </p>
+                    <div class="expertise-tags">
+                        <span class="expertise-tag">Python</span>
+                        <span class="expertise-tag">PyTorch</span>
+                        <span class="expertise-tag">Hugging Face</span>
+                        <span class="expertise-tag">LLM</span>
+                    </div>
                 </div>
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">⚙️</div>
-                    <h3>Architecture & DevOps</h3>
-                    <p>
+
+                <!-- Architecture & DevOps -->
+                <div class="expertise-card fade-in">
+                    <div class="expertise-card-header">
+                        <span class="expertise-icon">⚙️</span>
+                        <h3>Architecture & DevOps</h3>
+                    </div>
+                    <p class="expertise-description">
                         CI/CD пайплайны, Docker, Kubernetes.
-                        Проектирование баз данных, оптимизация SQL.
-                        Мониторинг через Prometheus + Grafana.
+                        Проектирование БД, оптимизация SQL.
                     </p>
+                    <div class="expertise-tags">
+                        <span class="expertise-tag">Docker</span>
+                        <span class="expertise-tag">Kubernetes</span>
+                        <span class="expertise-tag">CI/CD</span>
+                        <span class="expertise-tag">Prometheus</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <hr class="section-divider">
+            <!-- Technical Skills Grid -->
+            <div class="skills-grid-wrapper fade-in">
+                <div class="skills-section-title">
+                    <h3>Технические навыки</h3>
+                </div>
 
-    <!-- Experience Section -->
+                <div class="skills-unified-grid">
+                    <!-- Java Development -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">☕</div>
+                        <h4>Java Development</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">Java 11/17/21</span>
+                            <span class="skill-tag">Multithreading</span>
+                            <span class="skill-tag">Collections</span>
+                            <span class="skill-tag">Stream API</span>
+                            <span class="skill-tag">JVM Tuning</span>
+                        </div>
+                    </div>
+
+                    <!-- Spring Ecosystem -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">🌱</div>
+                        <h4>Spring Ecosystem</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">Spring MVC</span>
+                            <span class="skill-tag">Spring Security</span>
+                            <span class="skill-tag">Spring Data</span>
+                            <span class="skill-tag">Spring Cloud</span>
+                        </div>
+                    </div>
+
+                    <!-- Databases -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">🗄️</div>
+                        <h4>Databases</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Oracle</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">PL/SQL</span>
+                            <span class="skill-tag">Query Optimization</span>
+                        </div>
+                    </div>
+
+                    <!-- DevOps & Tools -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">🚀</div>
+                        <h4>DevOps & Tools</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Maven</span>
+                        </div>
+                    </div>
+
+                    <!-- Messaging -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">📨</div>
+                        <h4>Messaging</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">Apache Kafka</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">SOAP</span>
+                            <span class="skill-tag">Microservices</span>
+                        </div>
+                    </div>
+
+                    <!-- AI/ML & Testing -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-icon">🤖</div>
+                        <h4>AI/ML & Testing</h4>
+                        <div class="skill-category-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">JUnit</span>
+                            <span class="skill-tag">Mockito</span>
+                            <span class="skill-tag">Hugging Face</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="soft-skills-wrapper fade-in">
+                <div class="skills-section-title">
+                    <h3>Soft Skills</h3>
+                </div>
+                <div class="soft-skills-grid">
     <section class="experience" id="experience">
         <div class="container">
             <div class="section-title fade-in">
@@ -424,217 +539,6 @@
                             <li>Реализовал сквозной сервис авторизации и аутентификации на базе Spring Security и Keycloak</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- Skills Section (Hard + Soft) -->
-    <section class="skills" id="stack">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Навыки</h2>
-                <p>Технические и профессиональные компетенции</p>
-            </div>
-
-            <!-- Hard Skills -->
-            <div class="skills-subtitle fade-in">
-                <h3>Hard Skills</h3>
-            </div>
-
-            <div class="hard-skills-grid">
-                <!-- Backend -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">💻</span>
-                        <h3>Backend Development</h3>
-                    </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">☕</span> Java 11/17/21</span>
-                        <span class="stack-item"><span class="icon">🌱</span> Spring Boot</span>
-                        <span class="stack-item"><span class="icon">🔧</span> Spring Framework</span>
-                        <span class="stack-item"><span class="icon">🔐</span> Spring Security</span>
-                        <span class="stack-item"><span class="icon">💾</span> Spring Data</span>
-                        <span class="stack-item"><span class="icon">🔌</span> REST API</span>
-                        <span class="stack-item"><span class="icon">📮</span> SOAP</span>
-                        <span class="stack-item"><span class="icon">🏗️</span> Microservices</span>
-                    </div>
-                </div>
-
-                <!-- Data & Messaging -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🗄️</span>
-                        <h3>Data & Messaging</h3>
-                    </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐘</span> PostgreSQL</span>
-                        <span class="stack-item"><span class="icon">🔑</span> PL/pgSQL</span>
-                        <span class="stack-item"><span class="icon">📊</span> Oracle</span>
-                        <span class="stack-item"><span class="icon">⚡</span> Redis</span>
-                        <span class="stack-item"><span class="icon">📨</span> Apache Kafka</span>
-                        <span class="stack-item"><span class="icon">🔄</span> Liquibase</span>
-                        <span class="stack-item"><span class="icon">📝</span> JOOQ</span>
-                    </div>
-                </div>
-
-                <!-- DevOps & Tools -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🚀</span>
-                        <h3>DevOps & Tools</h3>
-                    </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐳</span> Docker</span>
-                        <span class="stack-item"><span class="icon">☸️</span> Kubernetes</span>
-                        <span class="stack-item"><span class="icon">🔄</span> CI/CD</span>
-                        <span class="stack-item"><span class="icon">📊</span> Prometheus</span>
-                        <span class="stack-item"><span class="icon">📈</span> Grafana</span>
-                        <span class="stack-item"><span class="icon">🔧</span> Git</span>
-                        <span class="stack-item"><span class="icon">📦</span> Maven</span>
-                        <span class="stack-item"><span class="icon">💻</span> IntelliJ IDEA</span>
-                    </div>
-                </div>
-
-                <!-- AI/ML & Testing -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🤖</span>
-                        <h3>AI/ML & Testing</h3>
-                    </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐍</span> Python</span>
-                        <span class="stack-item"><span class="icon">🧠</span> PyTorch</span>
-                        <span class="stack-item"><span class="icon">🤖</span> Hugging Face</span>
-                        <span class="stack-item"><span class="icon">🧪</span> JUnit</span>
-                        <span class="stack-item"><span class="icon">🎭</span> Mockito</span>
-                        <span class="stack-item"><span class="icon">🔑</span> Keycloak</span>
-                        <span class="stack-item"><span class="icon">🧪</span> Postman</span>
-                    </div>
-                </div>
-
-                <!-- Core Competencies -->
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">☕</div>
-                    <h3>Java Development</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">Java 11/17/21</span>
-                        <span class="skill-tag">Multithreading</span>
-                        <span class="skill-tag">Collections</span>
-                        <span class="skill-tag">Stream API</span>
-                        <span class="skill-tag">JVM Tuning</span>
-                    </div>
-                </div>
-
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">🌱</div>
-                    <h3>Spring Ecosystem</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">Spring Boot</span>
-                        <span class="skill-tag">Spring MVC</span>
-                        <span class="skill-tag">Spring Security</span>
-                        <span class="skill-tag">Spring Data</span>
-                        <span class="skill-tag">Spring Cloud</span>
-                    </div>
-                </div>
-
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">🗄️</div>
-                    <h3>Databases</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Oracle</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">PL/SQL</span>
-                        <span class="skill-tag">Query Optimization</span>
-                    </div>
-                </div>
-
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">🚀</div>
-                    <h3>DevOps & Tools</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">CI/CD</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Maven</span>
-                    </div>
-                </div>
-
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">📨</div>
-                    <h3>Messaging</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">Apache Kafka</span>
-                        <span class="skill-tag">REST API</span>
-                        <span class="skill-tag">SOAP</span>
-                        <span class="skill-tag">Microservices</span>
-                    </div>
-                </div>
-
-                <div class="hard-skill-card fade-in">
-                    <div class="hard-skill-icon">🤖</div>
-                    <h3>AI/ML & Testing</h3>
-                    <div class="hard-skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">JUnit</span>
-                        <span class="skill-tag">Mockito</span>
-                        <span class="skill-tag">Hugging Face</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Soft Skills -->
-            <div class="skills-subtitle fade-in" style="margin-top: 60px;">
-                <h3>Soft Skills</h3>
-            </div>
-            <div class="soft-skills-grid">
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">👥</div>
-                    <h3>Leadership & Mentoring</h3>
-                    <ul>
-                        <li>Менторство разработчиков в команде</li>
-                        <li>Code review и контроль качества</li>
-                        <li>Техническое лидерство в проектах</li>
-                        <li>Обучение новых сотрудников</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">🗣️</div>
-                    <h3>Communication</h3>
-                    <ul>
-                        <li>Коммуникация с заказчиками и стейкхолдерами</li>
-                        <li>Презентация технических решений</li>
-                        <li>Работа в кросс-функциональной команде</li>
-                        <li>Взаимодействие с QA, DevOps, аналитиками</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">📊</div>
-                    <h3>Management & Planning</h3>
-                    <ul>
-                        <li>CTO-компетенции</li>
-                        <li>Управление проектами и планирование спринтов</li>
-                        <li>Оценка сроков и рисков</li>
-                        <li>Приоритизация задач в бэклоге</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">🧠</div>
-                    <h3>Problem Solving</h3>
-                    <ul>
-                        <li>Архитектурное проектирование систем</li>
-                        <li>Оптимизация производительности</li>
-                        <li>Debugging сложных распределённых систем</li>
-                        <li>Рефакторинг legacy-кода</li>
-                    </ul>
                 </div>
             </div>
         </div>

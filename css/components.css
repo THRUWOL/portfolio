@@ -984,6 +984,174 @@
 }
 
 /* ============================================
+   EXPERTISE SECTION (Combined Competencies & Skills)
+   ============================================ */
+.expertise {
+    background: var(--bg-secondary);
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.expertise-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-java), var(--accent-spring), var(--accent-blue));
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.expertise-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-spring);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.expertise-card:hover::before {
+    transform: scaleX(1);
+}
+
+.expertise-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.expertise-icon {
+    font-size: 2.5rem;
+}
+
+.expertise-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.expertise-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.expertise-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+.expertise-tag:hover {
+    background: var(--accent-spring);
+    color: #fff;
+    border-color: var(--accent-spring);
+    transform: translateY(-2px);
+}
+
+/* Skills Unified Grid */
+.skills-grid-wrapper {
+    margin-top: 40px;
+}
+
+.skills-section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.skills-section-title h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-spring);
+}
+
+.skills-unified-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.skill-category-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    transition: all var(--transition-normal);
+}
+
+.skill-category-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-spring);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.skill-category-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.skill-category-card h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0 0 15px 0;
+}
+
+/* Soft Skills Wrapper */
+.soft-skills-wrapper {
+    margin-top: 60px;
+}
+
+@media (max-width: 992px) {
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-unified-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .skills-unified-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
    SKILLS SECTION
    ============================================ */
 .skills {
