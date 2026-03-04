@@ -226,35 +226,6 @@ function initFadeInAnimation() {
         observer.observe(element);
     });
 }
-
-/* ============================================
-   SKILL PROGRESS BARS ANIMATION
-   ============================================ */
-function initSkillProgress() {
-    const progressBars = document.querySelectorAll('.skill-progress-fill');
-    if (progressBars.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const progressBar = entry.target;
-                const progress = progressBar.getAttribute('data-progress');
-                
-                // Animate the progress bar
-                setTimeout(() => {
-                    progressBar.style.width = progress + '%';
-                }, 200);
-
-                observer.unobserve(progressBar);
-            }
-        });
-    }, { threshold: 0.3 });
-
-    progressBars.forEach(bar => {
-        observer.observe(bar);
-    });
-}
-
 /* ============================================
    READING PROGRESS BAR
    ============================================ */
@@ -537,7 +508,6 @@ function init() {
     initSmoothScroll();
     initEmailCopy();
     initFadeInAnimation();
-    initSkillProgress();
     initLazyLoading();
     initBackToTop();
     initTypewriter();
