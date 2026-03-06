@@ -399,7 +399,7 @@ function initLazyLoading() {
 }
 
 /* ============================================
-   LEARNING — карусель (кольцо: первая видит последнюю и наоборот)
+   LEARNING — карусель: одна карточка, автолистание, пауза при наведении
    ============================================ */
 function initLearnCarousel() {
     const carousel = document.querySelector('.learn-carousel[data-carousel]');
@@ -410,144 +410,58 @@ function initLearnCarousel() {
     const total = items.length;
     if (!viewport || !track || total === 0) return;
 
-    // Клоны для бесшовного кольца: слева последняя, справа первая
-    const cloneLast = items[total - 1].cloneNode(true);
-    const cloneFirst = items[0].cloneNode(true);
-    [cloneLast, cloneFirst].forEach((clone) => {
-        clone.setAttribute('data-carousel-clone', clone === cloneLast ? 'last' : 'first');
-        clone.removeAttribute('id');
-        clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
-    });
-    track.insertBefore(cloneLast, items[0]);
-    track.appendChild(cloneFirst);
-
-    const slides = Array.from(track.children);
-    const totalSlides = slides.length; // total + 2
-
     const prevBtn = carousel.querySelector('.learn-carousel-prev');
     const nextBtn = carousel.querySelector('.learn-carousel-next');
 
     let currentIndex = 0;
-    let transitioningToClone = null;
-    const CARD_RATIO = 0.68;
-
-    function getCardWidth() {
-        return viewport.offsetWidth * CARD_RATIO;
-    }
-
-    function getOffset() {
-        const w = viewport.offsetWidth;
-        const cardW = getCardWidth();
-        return (w - cardW) / 2;
-    }
+    const AUTO_PLAY_MS = 4500;
+    let autoPlayId = null;
 
     function updateLayout() {
-        const cardW = getCardWidth();
-        const offset = getOffset();
-        track.style.width = totalSlides * cardW + 'px';
-        slides.forEach((el) => {
-            el.style.flex = `0 0 ${cardW}px`;
+        const w = viewport.offsetWidth;
+        track.style.width = total * w + 'px';
+        items.forEach((el) => {
+            el.style.flex = `0 0 ${w}px`;
             el.style.minWidth = '0';
         });
-        const centerDomIndex = currentIndex + 1;
-        track.style.transform = `translateX(${offset - centerDomIndex * cardW}px)`;
-    }
-
-    function updateCardStates() {
-        const prevDom = currentIndex;
-        const centerDom = currentIndex + 1;
-        const nextDom = currentIndex + 2;
-        slides.forEach((el, i) => {
-            el.classList.remove('is-center', 'is-prev', 'is-next');
-            if (i === centerDom) el.classList.add('is-center');
-            else if (i === prevDom) el.classList.add('is-prev');
-            else if (i === nextDom) el.classList.add('is-next');
-        });
-    }
-
-    function applyPosition(enableTransition) {
-        const cardW = getCardWidth();
-        const offset = getOffset();
-        const centerDomIndex = currentIndex + 1;
-        track.style.transition = enableTransition ? '' : 'none';
-        track.style.transform = `translateX(${offset - centerDomIndex * cardW}px)`;
-        updateCardStates();
-    }
-
-    function goTo(index) {
-        if (transitioningToClone) return;
-        currentIndex = (index + total) % total;
-        applyPosition(true);
-    }
-
-    const DURATION_MS = 400;
-    let jumpTimeoutId = null;
-
-    function doJumpFromClone() {
-        if (!transitioningToClone) return;
-        const cardW = getCardWidth();
-        const offset = getOffset();
         track.style.transition = 'none';
-        if (transitioningToClone === 'prev') {
-            currentIndex = total - 1;
-            track.style.transform = `translateX(${offset - (currentIndex + 1) * cardW}px)`;
-        } else {
-            currentIndex = 0;
-            track.style.transform = `translateX(${offset - (currentIndex + 1) * cardW}px)`;
-        }
-        transitioningToClone = null;
-        updateCardStates();
-        void track.offsetHeight;
+        track.style.transform = `translateX(-${currentIndex * w}px)`;
         requestAnimationFrame(() => { track.style.transition = ''; });
     }
 
-    function onTransitionEnd(e) {
-        if (e.target !== track || e.propertyName !== 'transform' || !transitioningToClone) return;
-        if (jumpTimeoutId != null) clearTimeout(jumpTimeoutId);
-        jumpTimeoutId = null;
-        doJumpFromClone();
-    }
-
-    track.addEventListener('transitionend', onTransitionEnd);
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            if (transitioningToClone) return;
-            if (currentIndex > 0) {
-                goTo(currentIndex - 1);
-                return;
-            }
-            if (jumpTimeoutId != null) clearTimeout(jumpTimeoutId);
-            transitioningToClone = 'prev';
-            const cardW = getCardWidth();
-            const offset = getOffset();
-            track.style.transform = `translateX(${offset - 0 * cardW}px)`;
-            updateCardStates();
-            jumpTimeoutId = setTimeout(() => {
-                jumpTimeoutId = null;
-                doJumpFromClone();
-            }, DURATION_MS);
+    function updateCardStates() {
+        items.forEach((el, i) => {
+            el.classList.toggle('is-center', i === currentIndex);
+            el.classList.remove('is-prev', 'is-next');
         });
     }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (transitioningToClone) return;
-            if (currentIndex < total - 1) {
-                goTo(currentIndex + 1);
-                return;
-            }
-            if (jumpTimeoutId != null) clearTimeout(jumpTimeoutId);
-            transitioningToClone = 'next';
-            const cardW = getCardWidth();
-            const offset = getOffset();
-            track.style.transform = `translateX(${offset - (totalSlides - 1) * cardW}px)`;
-            updateCardStates();
-            jumpTimeoutId = setTimeout(() => {
-                jumpTimeoutId = null;
-                doJumpFromClone();
-            }, DURATION_MS);
-        });
+
+    function goTo(index) {
+        currentIndex = (index + total) % total;
+        const w = viewport.offsetWidth;
+        track.style.transform = `translateX(-${currentIndex * w}px)`;
+        updateCardStates();
     }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayId = setInterval(() => {
+            goTo(currentIndex + 1);
+        }, AUTO_PLAY_MS);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayId != null) {
+            clearInterval(autoPlayId);
+            autoPlayId = null;
+        }
+    }
+
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
 
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(updateLayout) : null;
     if (ro) ro.observe(viewport);
@@ -556,6 +470,7 @@ function initLearnCarousel() {
     updateLayout();
     updateCardStates();
     goTo(0);
+    startAutoPlay();
 }
 
 function initLearnCards() {

@@ -52,7 +52,7 @@
     /* Layout */
     --header-height: 72px;
     --container-narrow: 680px;
-    --container-wide: 1200px;
+    --container-wide: 1440px;
     --section-padding: clamp(72px, 12vw, 128px);
     --section-title-gap: clamp(40px, 6vw, 64px);
     --radius-sm: 8px;
