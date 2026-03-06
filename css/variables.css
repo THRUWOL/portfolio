@@ -10,7 +10,7 @@
     --offwhite: #f6f4f0;
     --gray-100: #e6e4df;
     --gray-200: #9c9994;
-    --gray-300: #6b6764;
+    --gray-300: #554f4c;
 
     /* Surfaces */
     --bg-primary: var(--white);
@@ -19,10 +19,10 @@
     --bg-card: var(--white);
     --bg-elevated: var(--white);
 
-    /* Text */
+    /* Text — контраст по WCAG на кремовом фоне */
     --text-primary: var(--black);
-    --text-secondary: #3d3b38;
-    --text-muted: var(--gray-300);
+    --text-secondary: #353330;
+    --text-muted: #554f4c;
     --text-inverse: #fefdfb;
 
     /* Accent — медно-янтарный */

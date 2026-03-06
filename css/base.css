@@ -113,12 +113,12 @@ section {
 }
 
 /* ============================================
-   REVEAL ANIMATIONS
+   REVEAL ANIMATIONS — премиум, без резкости
    ============================================ */
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+    transform: translateY(8px);
+    transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
 }
 
 .fade-in.visible {
@@ -126,9 +126,29 @@ section {
     transform: translateY(0);
 }
 
-.fade-in.visible .reveal-delay-1 { transition-delay: 0.08s; }
-.fade-in.visible .reveal-delay-2 { transition-delay: 0.16s; }
-.fade-in.visible .reveal-delay-3 { transition-delay: 0.24s; }
+.fade-in.visible .reveal-delay-1 { transition-delay: 0.06s; }
+.fade-in.visible .reveal-delay-2 { transition-delay: 0.12s; }
+.fade-in.visible .reveal-delay-3 { transition-delay: 0.18s; }
+
+/* Ступенчатое появление карточек экспертизы */
+.expertise-cards .expertise-card.fade-in.visible:nth-child(1) { transition-delay: 0s; }
+.expertise-cards .expertise-card.fade-in.visible:nth-child(2) { transition-delay: 0.06s; }
+.expertise-cards .expertise-card.fade-in.visible:nth-child(3) { transition-delay: 0.12s; }
+
+/* Ступенчатое появление карточек проектов внутри блока */
+.timeline-company-block .project-card {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
+}
+.timeline-company-block .project-card:nth-child(2) { transition-delay: 0.05s; }
+.timeline-company-block .project-card:nth-child(3) { transition-delay: 0.1s; }
+.timeline-company-block .project-card:nth-child(4) { transition-delay: 0.15s; }
+.timeline-company-block .project-card:nth-child(5) { transition-delay: 0.2s; }
+.timeline-company-block.visible .project-card {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 img.lazy {
     opacity: 0;

@@ -118,11 +118,23 @@ function setActiveSection() {
    SMOOTH SCROLL FOR ANCHOR LINKS
    ============================================ */
 function initSmoothScroll() {
+    const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
+    const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
+    const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
+    const overlay = document.getElementById('mobileOverlay');
+
+    function closeMobileMenu() {
+        if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (overlay) overlay.classList.remove(CONFIG.CLASSES.ACTIVE);
+        document.body.style.overflow = '';
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
 
-            // Skip if it's just "#" or external link
             if (href === '#' || !href.startsWith('#')) return;
 
             e.preventDefault();
@@ -133,6 +145,7 @@ function initSmoothScroll() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                closeMobileMenu();
             }
         });
     });
@@ -408,6 +421,21 @@ function initLearnCarousel() {
     if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
 
+    /* Свайп на мобильных */
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const SWIPE_MIN = 50;
+    viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) < SWIPE_MIN) return;
+        if (diff > 0) goTo(currentIndex + 1);
+        else goTo(currentIndex - 1);
+    }, { passive: true });
+
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(updateLayout) : null;
     if (ro) ro.observe(viewport);
     window.addEventListener('resize', updateLayout);
@@ -416,6 +444,24 @@ function initLearnCarousel() {
     updateCardStates();
     goTo(0);
     startAutoPlay();
+}
+
+/* Скелетон логотипов обучения: показывать fallback до загрузки img */
+function initLearningLogos() {
+    document.querySelectorAll('.learn-logo').forEach(logo => {
+        const img = logo.querySelector('.learn-logo-img');
+        const fallback = logo.querySelector('.learn-logo-fallback');
+        if (!img || !fallback) return;
+        if (img.complete && img.naturalWidth > 0) {
+            logo.classList.add('img-loaded');
+            return;
+        }
+        img.addEventListener('load', () => logo.classList.add('img-loaded'));
+        img.addEventListener('error', () => {
+            fallback.classList.add('is-visible');
+            logo.classList.add('img-loaded');
+        });
+    });
 }
 
 function initLearnCards() {
@@ -511,6 +557,7 @@ function init() {
     initSmoothScroll();
     initEmailCopy();
     initLearnCarousel();
+    initLearningLogos();
     initLearnCards();
     initFadeInAnimation();
     initLazyLoading();
