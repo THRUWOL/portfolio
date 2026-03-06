@@ -1,25 +1,27 @@
 /* ============================================
    BASE STYLES & RESET
    ============================================ */
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Skip to Content Link (Accessibility) */
 .skip-to-content {
     position: absolute;
     left: -9999px;
     top: 0;
     z-index: 9999;
-    background: var(--accent-spring);
-    color: #fff;
-    padding: 15px 25px;
+    background: var(--accent);
+    color: var(--text-inverse);
+    padding: 14px 24px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    border-radius: 0 0 8px 0;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    border: var(--border-width) solid var(--accent);
+    border-radius: 0;
 }
 
 .skip-to-content:focus {
@@ -29,22 +31,38 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--text-inverse);
 }
 
 /* ============================================
-   CUSTOM SCROLLBAR (IDE Style)
+   CUSTOM SCROLLBAR — скрыт для страницы, виден для блоков (код, карусель)
    ============================================ */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,8 +71,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: var(--scrollbar-thumb);
-    border-radius: 5px;
-    border: 2px solid var(--scrollbar-bg);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -65,9 +82,10 @@ body {
    TYPOGRAPHY
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    line-height: 1.3;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
 }
 
 .mono {
@@ -77,36 +95,30 @@ h1, h2, h3, h4, h5, h6 {
 .text-java { color: var(--accent-java); }
 .text-spring { color: var(--accent-spring); }
 .text-blue { color: var(--accent-blue); }
-.text-green { color: var(--accent-green); }
+.text-accent { color: var(--accent); }
 .text-purple { color: var(--accent-purple); }
-.text-yellow { color: var(--accent-yellow); }
 
 /* ============================================
-   LAYOUT UTILITIES
+   LAYOUT
    ============================================ */
 .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: var(--container-wide);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(20px, 2.5vw, 40px);
 }
 
 section {
-    padding: 80px 0;
-}
-
-@media (max-width: 768px) {
-    section {
-        padding: 60px 0;
-    }
+    padding: var(--section-padding) 0;
 }
 
 /* ============================================
-   ANIMATION CLASSES
+   REVEAL ANIMATIONS — премиум, без резкости
    ============================================ */
 .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(8px);
+    transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
 }
 
 .fade-in.visible {
@@ -114,7 +126,30 @@ section {
     transform: translateY(0);
 }
 
-/* Lazy loading image fade-in */
+.fade-in.visible .reveal-delay-1 { transition-delay: 0.06s; }
+.fade-in.visible .reveal-delay-2 { transition-delay: 0.12s; }
+.fade-in.visible .reveal-delay-3 { transition-delay: 0.18s; }
+
+/* Ступенчатое появление карточек экспертизы */
+.expertise-cards .expertise-card.fade-in.visible:nth-child(1) { transition-delay: 0s; }
+.expertise-cards .expertise-card.fade-in.visible:nth-child(2) { transition-delay: 0.06s; }
+.expertise-cards .expertise-card.fade-in.visible:nth-child(3) { transition-delay: 0.12s; }
+
+/* Ступенчатое появление карточек проектов внутри блока */
+.timeline-company-block .project-card {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
+}
+.timeline-company-block .project-card:nth-child(2) { transition-delay: 0.05s; }
+.timeline-company-block .project-card:nth-child(3) { transition-delay: 0.1s; }
+.timeline-company-block .project-card:nth-child(4) { transition-delay: 0.15s; }
+.timeline-company-block .project-card:nth-child(5) { transition-delay: 0.2s; }
+.timeline-company-block.visible .project-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 img.lazy {
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -128,20 +163,6 @@ img.lazy.loaded {
    UTILITIES
    ============================================ */
 .text-center { text-align: center; }
-.mt-20 { margin-top: 20px; }
-.mb-20 { margin-bottom: 20px; }
-
-/* ============================================
-   ACCESSIBILITY - Focus Visible
-   ============================================ */
-a:focus-visible,
-button:focus-visible {
-    outline: 2px solid var(--accent-spring);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-/* Screen reader only class */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -152,4 +173,14 @@ button:focus-visible {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
 }

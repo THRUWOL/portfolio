@@ -45,7 +45,7 @@
          PWA MANIFEST
          ============================================ -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#6db33f">
+    <meta name="theme-color" content="#0f0e0d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Ярош Никита">
@@ -55,17 +55,16 @@
          ============================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Local font fallbacks if Google Fonts is unavailable */
         @font-face {
             font-family: 'JetBrains Mono Fallback';
             src: local('Consolas'), local('Monaco'), local('Courier New'), monospace;
         }
         @font-face {
-            font-family: 'Inter Fallback';
-            src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial'), sans-serif;
+            font-family: 'Outfit Fallback';
+            src: local('Segoe UI'), local('Roboto'), sans-serif;
         }
     </style>
 
@@ -73,7 +72,7 @@
          STYLES
          ============================================ -->
     <link rel="preload" as="style" href="css/style.css">
-    <link rel="stylesheet" href="css/style.css?v=1.0.0">
+    <link rel="stylesheet" href="css/style.css?v=2.0.0">
 
     <!-- ============================================
          JSON-LD STRUCTURED DATA (Schema.org)
@@ -154,9 +153,6 @@
     <!-- Skip to Content Link -->
     <a href="#main-content" class="skip-to-content">Перейти к контенту</a>
 
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="readingProgress"></div>
-
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" type="button" aria-label="Наверх">↑</button>
 
@@ -170,24 +166,12 @@
             <nav class="nav">
                 <ul class="nav-links">
                     <li><a href="#about">Обо мне</a></li>
-                    <li><a href="#competencies">Компетенции</a></li>
+                    <li><a href="#expertise">Экспертиза</a></li>
                     <li><a href="#experience">Опыт</a></li>
-                    <li><a href="#stack">Навыки</a></li>
-                    <li><a href="#education">Образование</a></li>
-                    <li><a href="#certificates">Сертификаты</a></li>
+                    <li><a href="#learning">Обучение</a></li>
                     <li><a href="#contact" class="mobile-contact-link">Связаться</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
-                        <!-- Sun icon -->
-                        <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
-                        </svg>
-                        <!-- Moon icon -->
-                        <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-                        </svg>
-                    </button>
                     <a href="#contact" class="btn-contact">Связаться</a>
                     <button class="mobile-menu-btn hamburger" type="button" aria-label="Меню">
                         <span></span>
@@ -202,90 +186,136 @@
     <!-- Mobile Menu Overlay -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <!-- Main Content -->
+    <!-- Noise overlay (studio texture) -->
+    <div class="noise" aria-hidden="true"></div>
+
     <main id="main-content">
     <!-- Hero Section -->
     <section class="hero" id="about">
+        <div class="hero-bg" aria-hidden="true"></div>
         <div class="container hero-content">
-            <div class="hero-text">
-                <h1><span class="text-java">Java</span> Backend<br>Developer</h1>
-                <p class="hero-subtitle">Spring Framework • AI/ML Integration</p>
-                <p class="hero-description">
-                    Разрабатываю высоконагруженные системы для банковского сектора.
-                    3+ года коммерческого опыта. От архитектуры до продакшена.
-                </p>
-                <div class="hero-badges">
-                    <span class="badge badge-java">☕ Java 21</span>
-                    <span class="badge badge-spring">🌱 Spring Boot</span>
-                    <span class="badge badge-highload">⚡ Highload</span>
-                    <span class="badge badge-ai">🤖 AI Integration</span>
-                </div>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn-primary">
-                        <span>📬</span> Обсудить проект
-                    </a>
-                    <a href="a7f3e9d2_resume.pdf" class="btn-secondary" download>
-                        <span>📄</span> Скачать резюме
-                    </a>
-                </div>
-            </div>
-            <div class="hero-code">
-                <div class="code-header">
-                    <div class="code-dots">
-                        <span class="code-dot red"></span>
-                        <span class="code-dot yellow"></span>
-                        <span class="code-dot green"></span>
+            <span class="hero-label fade-in"><span class="mono">01</span> — Обо мне</span>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1 class="hero-title fade-in">
+                        <span class="line"><span class="text-java">Java</span> Backend</span>
+                        <span class="line line-accent">Developer</span>
+                    </h1>
+                    <p class="hero-subtitle fade-in">Spring Framework • AI/ML • Highload</p>
+                    <p class="hero-description fade-in">
+                        Разрабатываю высоконагруженные системы для банковского сектора.
+                        3+ года коммерческого опыта. От архитектуры до продакшена.
+                    </p>
+                    <div class="hero-badges fade-in">
+                        <span class="badge badge-java">Java 21</span>
+                        <span class="badge badge-spring">Spring Boot</span>
+                        <span class="badge badge-highload">Highload</span>
+                        <span class="badge badge-ai">AI Integration</span>
                     </div>
-                    <span class="code-title">DeveloperProfile.java</span>
+                    <div class="hero-actions fade-in">
+                        <a href="#contact" class="btn-primary">
+                            Обсудить проект
+                        </a>
+                        <a href="a7f3e9d2_resume.pdf" class="btn-secondary" download>
+                            Скачать резюме
+                        </a>
+                    </div>
                 </div>
-                <div class="code-content" id="typewriterCode">
-                    <!-- Code will be typed by JavaScript -->
-                </div>
-                <div class="code-status">
-                    <div class="status-text">
+                <div class="hero-code fade-in">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="code-dot red"></span>
+                            <span class="code-dot yellow"></span>
+                            <span class="code-dot green"></span>
+                        </div>
+                        <span class="code-title mono">DeveloperProfile.java</span>
+                    </div>
+                    <div class="code-content mono" id="typewriterCode"></div>
+                    <div class="code-status">
                         <span class="status-indicator"></span>
-                        <span>Open for Work / Freelance</span>
+                        <span class="mono">Open for Work / Freelance</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Competencies Section -->
-    <section class="competencies" id="competencies">
+    <!-- Expertise (Competencies + Skills merged) -->
+    <section class="expertise" id="expertise">
         <div class="container">
-            <div class="section-title fade-in">
-                <h2>Компетенции</h2>
-                <p>Ключевые направления экспертизы</p>
+            <div class="section-title fade-in" data-num="02">
+                <span class="section-num mono">02</span>
+                <h2>Экспертиза</h2>
+                <p>Направления работы и технологический стек</p>
             </div>
-            <div class="competencies-grid">
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">🏦</div>
+            <div class="expertise-cards">
+                <div class="expertise-card fade-in">
+                    <span class="expertise-icon" aria-hidden="true">🏦</span>
                     <h3>Enterprise Backend</h3>
-                    <p>
-                        Высоконагруженные системы для финансового сектора.
-                        Безопасность, микросервисы, работа с legacy-кодом.
-                        Опыт в Банке ВТБ — платформе ЦФА на базе Masterchain.
-                    </p>
+                    <p>Высоконагруженные системы для финансового сектора. Безопасность, микросервисы, работа с legacy. Опыт в Банке ВТБ — платформа ЦФА на базе Masterchain.</p>
+                    <div class="expertise-stack">
+                        <span class="expertise-tag">Java 11/17/21</span>
+                        <span class="expertise-tag">Spring Boot</span>
+                        <span class="expertise-tag">Spring Framework</span>
+                        <span class="expertise-tag">Spring Security</span>
+                        <span class="expertise-tag">REST API</span>
+                        <span class="expertise-tag">SOAP</span>
+                        <span class="expertise-tag">Microservices</span>
+                        <span class="expertise-tag">PostgreSQL</span>
+                        <span class="expertise-tag">Kafka</span>
+                        <span class="expertise-tag">Docker</span>
+                        <span class="expertise-tag">CI/CD</span>
+                        <span class="expertise-tag">Prometheus</span>
+                        <span class="expertise-tag">Grafana</span>
+                        <span class="expertise-tag">JUnit</span>
+                        <span class="expertise-tag">Maven</span>
+                    </div>
                 </div>
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">🤖</div>
+                <div class="expertise-card fade-in">
+                    <span class="expertise-icon" aria-hidden="true">🤖</span>
                     <h3>AI Integration</h3>
-                    <p>
-                        Интеграция LLM-моделей в бизнес-процессы.
-                        Python, PyTorch, Hugging Face.
-                        Создание AI-систем для генерации ТЗ и автоматизации.
-                    </p>
+                    <p>Интеграция LLM в бизнес-процессы. Создание AI-систем для генерации ТЗ и автоматизации. Опыт с нуля: архитектура, GPU-кластер, метрики качества.</p>
+                    <div class="expertise-stack">
+                        <span class="expertise-tag">Python</span>
+                        <span class="expertise-tag">PyTorch</span>
+                        <span class="expertise-tag">Hugging Face</span>
+                        <span class="expertise-tag">Java</span>
+                        <span class="expertise-tag">Spring Boot</span>
+                        <span class="expertise-tag">PostgreSQL</span>
+                        <span class="expertise-tag">Docker</span>
+                        <span class="expertise-tag">JUnit</span>
+                        <span class="expertise-tag">Mockito</span>
+                    </div>
                 </div>
-                <div class="competency-card fade-in">
-                    <div class="competency-icon">⚙️</div>
+                <div class="expertise-card fade-in">
+                    <span class="expertise-icon" aria-hidden="true">⚙️</span>
                     <h3>Architecture & DevOps</h3>
-                    <p>
-                        CI/CD пайплайны, Docker, Kubernetes.
-                        Проектирование баз данных, оптимизация SQL.
-                        Мониторинг через Prometheus + Grafana.
-                    </p>
+                    <p>CI/CD, контейнеризация, проектирование БД и оптимизация SQL. Мониторинг и наблюдаемость. Перенос legacy (Oracle → PostgreSQL).</p>
+                    <div class="expertise-stack">
+                        <span class="expertise-tag">Docker</span>
+                        <span class="expertise-tag">Kubernetes</span>
+                        <span class="expertise-tag">CI/CD</span>
+                        <span class="expertise-tag">Prometheus</span>
+                        <span class="expertise-tag">Grafana</span>
+                        <span class="expertise-tag">PostgreSQL</span>
+                        <span class="expertise-tag">PL/pgSQL</span>
+                        <span class="expertise-tag">Oracle</span>
+                        <span class="expertise-tag">Liquibase</span>
+                        <span class="expertise-tag">JOOQ</span>
+                        <span class="expertise-tag">Redis</span>
+                        <span class="expertise-tag">Git</span>
+                        <span class="expertise-tag">Keycloak</span>
+                    </div>
                 </div>
+            </div>
+            <div class="expertise-soft fade-in">
+                <span class="expertise-soft-label mono">В команде</span>
+                <ul class="expertise-soft-list">
+                    <li>Менторство и code review</li>
+                    <li>Коммуникация со стейкхолдерами</li>
+                    <li>Планирование и приоритизация</li>
+                    <li>Архитектура и решение сложных задач</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -293,8 +323,9 @@
     <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="container">
-            <div class="section-title fade-in">
-                <h2>Опыт работы</h2>
+            <div class="section-title fade-in" data-num="03">
+                <span class="section-num mono">03</span>
+                <h2>Опыт</h2>
                 <p>Профессиональный путь и достижения</p>
             </div>
 
@@ -414,303 +445,199 @@
         </div>
     </section>
 
-    <!-- Skills Section (Hard + Soft) -->
-    <section class="skills" id="stack">
+    <!-- Learning Section — карусель с логотипами -->
+    <section class="learning" id="learning">
         <div class="container">
-            <div class="section-title fade-in">
-                <h2>Навыки</h2>
-                <p>Технические и профессиональные компетенции</p>
+            <div class="section-title fade-in" data-num="04">
+                <span class="section-num mono">04</span>
+                <h2>Обучение</h2>
+                <p>Листайте карусель — в карточке сразу видна вся информация</p>
             </div>
 
-            <!-- Hard Skills -->
-            <div class="skills-subtitle fade-in">
-                <h3>Hard Skills</h3>
-            </div>
-            <div class="stack-groups">
-                <!-- Backend -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">💻</span>
-                        <h3>Backend Development</h3>
+            <div class="learn-carousel" data-carousel>
+                <button type="button" class="learn-carousel-btn learn-carousel-prev" aria-label="Предыдущая карточка">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="learn-carousel-btn learn-carousel-next" aria-label="Следующая карточка">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+                <div class="learn-carousel-viewport">
+                    <div class="learn-carousel-track">
+                <!-- КФУ — Магистр -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-kfu" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">ФТИ КФУ</span>
+                        </span>
+                        <span class="learn-label">Информатика и вычислительная техника</span>
+                        <span class="learn-year mono">2025</span>
                     </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">☕</span> Java 11/17/21</span>
-                        <span class="stack-item"><span class="icon">🌱</span> Spring Boot</span>
-                        <span class="stack-item"><span class="icon">🔧</span> Spring Framework</span>
-                        <span class="stack-item"><span class="icon">🔐</span> Spring Security</span>
-                        <span class="stack-item"><span class="icon">💾</span> Spring Data</span>
-                        <span class="stack-item"><span class="icon">🔌</span> REST API</span>
-                        <span class="stack-item"><span class="icon">📮</span> SOAP</span>
-                        <span class="stack-item"><span class="icon">🏗️</span> Microservices</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Магистратура</span>
+                            <p class="learn-org">Крымский федеральный университет им. В. И. Вернадского</p>
+                            <p class="learn-meta">Физико-технический институт, Информатика и вычислительная техника</p>
+                            <p class="learn-thesis">Тема диплома: «Исследование и реализация системы автоматизированного формирования технического задания в IT-проектах с использованием искусственного интеллекта»</p>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Data & Messaging -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🗄️</span>
-                        <h3>Data & Messaging</h3>
+                <!-- КФУ — Бакалавр -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-kfu" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">ФТИ КФУ</span>
+                        </span>
+                        <span class="learn-label">Программная инженерия</span>
+                        <span class="learn-year mono">2023</span>
                     </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐘</span> PostgreSQL</span>
-                        <span class="stack-item"><span class="icon">🔑</span> PL/pgSQL</span>
-                        <span class="stack-item"><span class="icon">📊</span> Oracle</span>
-                        <span class="stack-item"><span class="icon">⚡</span> Redis</span>
-                        <span class="stack-item"><span class="icon">📨</span> Apache Kafka</span>
-                        <span class="stack-item"><span class="icon">🔄</span> Liquibase</span>
-                        <span class="stack-item"><span class="icon">📝</span> JOOQ</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Бакалавриат</span>
+                            <p class="learn-org">Крымский федеральный университет им. В. И. Вернадского</p>
+                            <p class="learn-meta">Физико-технический институт, Программная инженерия</p>
+                            <p class="learn-thesis">Тема диплома: «Разработка системы управления обучением»</p>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- DevOps & Tools -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🚀</span>
-                        <h3>DevOps & Tools</h3>
+                <!-- МФТИ — Java Pro -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-mipt" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">МФТИ</span>
+                        </span>
+                        <span class="learn-label">Java разработчик Pro</span>
+                        <span class="learn-year mono">2026</span>
                     </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐳</span> Docker</span>
-                        <span class="stack-item"><span class="icon">☸️</span> Kubernetes</span>
-                        <span class="stack-item"><span class="icon">🔄</span> CI/CD</span>
-                        <span class="stack-item"><span class="icon">📊</span> Prometheus</span>
-                        <span class="stack-item"><span class="icon">📈</span> Grafana</span>
-                        <span class="stack-item"><span class="icon">🔧</span> Git</span>
-                        <span class="stack-item"><span class="icon">📦</span> Maven</span>
-                        <span class="stack-item"><span class="icon">💻</span> IntelliJ IDEA</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Диплом о переподготовке</span>
+                            <p class="learn-org">Московский физико-технический институт</p>
+                            <p class="learn-desc">Углублённое изучение полного цикла разработки на Java.</p>
+                            <p class="learn-thesis">Тема диплома: «Проектирование и разработка высоконагруженной системы учёта инвестиций с микросервисной архитектурой на базе Java Spring Boot и React»</p>
+                            <a href="Сертификаты/МФТИ/h9d5f3b2_mipt_diploma_java.pdf" class="learn-link" target="_blank" rel="noopener">Посмотреть диплом</a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- AI/ML & Testing -->
-                <div class="stack-group fade-in">
-                    <div class="stack-group-header">
-                        <span class="stack-icon">🤖</span>
-                        <h3>AI/ML & Testing</h3>
+                <!-- МФТИ — Технологии и ОС -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-mipt" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">МФТИ</span>
+                        </span>
+                        <span class="learn-label">Технологии программирования и ОС</span>
+                        <span class="learn-year mono">2026</span>
                     </div>
-                    <div class="stack-items">
-                        <span class="stack-item"><span class="icon">🐍</span> Python</span>
-                        <span class="stack-item"><span class="icon">🧠</span> PyTorch</span>
-                        <span class="stack-item"><span class="icon">🤖</span> Hugging Face</span>
-                        <span class="stack-item"><span class="icon">🧪</span> JUnit</span>
-                        <span class="stack-item"><span class="icon">🎭</span> Mockito</span>
-                        <span class="stack-item"><span class="icon">🔑</span> Keycloak</span>
-                        <span class="stack-item"><span class="icon">🧪</span> Postman</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Повышение квалификации</span>
+                            <p class="learn-org">Московский физико-технический институт</p>
+                            <p class="learn-desc">Современные технологии программирования, архитектурные паттерны и принципы работы ОС.</p>
+                            <a href="Сертификаты/МФТИ/i2e8g6d4_mipt_certificate_os.pdf" class="learn-link" target="_blank" rel="noopener">Посмотреть удостоверение</a>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </article>
 
-            <!-- Soft Skills -->
-            <div class="skills-subtitle fade-in" style="margin-top: 60px;">
-                <h3>Soft Skills</h3>
-            </div>
-            <div class="soft-skills-grid">
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">👥</div>
-                    <h3>Leadership & Mentoring</h3>
-                    <ul>
-                        <li>Менторство разработчиков в команде</li>
-                        <li>Code review и контроль качества</li>
-                        <li>Техническое лидерство в проектах</li>
-                        <li>Обучение новых сотрудников</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">🗣️</div>
-                    <h3>Communication</h3>
-                    <ul>
-                        <li>Коммуникация с заказчиками и стейкхолдерами</li>
-                        <li>Презентация технических решений</li>
-                        <li>Работа в кросс-функциональной команде</li>
-                        <li>Взаимодействие с QA, DevOps, аналитиками</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">📊</div>
-                    <h3>Management & Planning</h3>
-                    <ul>
-                        <li>CTO-компетенции</li>
-                        <li>Управление проектами и планирование спринтов</li>
-                        <li>Оценка сроков и рисков</li>
-                        <li>Приоритизация задач в бэклоге</li>
-                    </ul>
-                </div>
-
-                <div class="soft-skill-card fade-in">
-                    <div class="soft-skill-icon">🧠</div>
-                    <h3>Problem Solving</h3>
-                    <ul>
-                        <li>Архитектурное проектирование систем</li>
-                        <li>Оптимизация производительности</li>
-                        <li>Debugging сложных распределённых систем</li>
-                        <li>Рефакторинг legacy-кода</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="education" id="education">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Образование</h2>
-                <p>Академическая подготовка</p>
-            </div>
-            <div class="education-grid">
-                <div class="education-card fade-in">
-                    <div class="education-icon">🎓</div>
-                    <div class="education-header">
-                        <span class="education-degree">Магистр</span>
-                        <span class="education-year">2025</span>
+                <!-- МФТИ — Java -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-mipt" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">МФТИ</span>
+                        </span>
+                        <span class="learn-label">Технологии программирования на Java</span>
+                        <span class="learn-year mono">2025</span>
                     </div>
-                    <p class="education-university">Крымский федеральный университет им. В. И. Вернадского</p>
-                    <p class="education-field">Физико-технический институт, Информатика и вычислительная техника</p>
-                    <p class="education-thesis">Тема диплома: «Исследование и реализация системы автоматизированного формирования технического задания в IT-проектах с использованием искусственного интеллекта»</p>
-                </div>
-                <div class="education-card fade-in">
-                    <div class="education-icon">🎓</div>
-                    <div class="education-header">
-                        <span class="education-degree">Бакалавр</span>
-                        <span class="education-year">2023</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Повышение квалификации</span>
+                            <p class="learn-org">Московский физико-технический институт</p>
+                            <p class="learn-desc">Современные практики, многопоточность и функциональное программирование на Java.</p>
+                            <a href="Сертификаты/МФТИ/g7c4e2a1_mipt_certificate.pdf" class="learn-link" target="_blank" rel="noopener">Посмотреть удостоверение</a>
+                        </div>
                     </div>
-                    <p class="education-university">Крымский федеральный университет им. В. И. Вернадского</p>
-                    <p class="education-field">Физико-технический институт, Программная инженерия</p>
-                    <p class="education-thesis">Тема диплома: «Разработка системы управления обучением»</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                </article>
 
-    <!-- Certificates Section -->
-    <section class="certificates" id="certificates">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Сертификаты</h2>
-                <p>Профессиональное развитие и повышение квалификации</p>
-            </div>
-            <div class="certificates-grid">
-                <!-- Сертификат 1: МФТИ Java Developer Pro -->
-                <div class="certificate-card fade-in">
-                    <div class="certificate-icon">☕</div>
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Java разработчик Pro</h3>
-                        <span class="certificate-year">2026</span>
+                <!-- Иннополис -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-innopolis" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://static.tildacdn.com/tild3932-3438-4836-a131-656564373437/Frame_4.png" alt="Университет Иннополис" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">Иннополис</span>
+                        </span>
+                        <span class="learn-label">Технологии ИИ и анализа данных</span>
+                        <span class="learn-year mono">2023</span>
                     </div>
-                    <p class="certificate-organization">Московский физико-технический институт (МФТИ)</p>
-                    <p class="certificate-description">Диплом о профессиональной переподготовке. Углублённое изучение полного цикла разработки на Java.</p>
-                    <p class="certificate-thesis"><strong>Тема диплома:</strong> «Проектирование и разработка высоконагруженной системы учёта инвестиций с микросервисной архитектурой на базе Java Spring Boot и React»</p>
-                    <a href="Сертификаты/МФТИ/h9d5f3b2_mipt_diploma_java.pdf" class="certificate-link" target="_blank" rel="noopener">
-                        <span>📄</span> Посмотреть диплом
-                    </a>
-                </div>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Повышение квалификации</span>
+                            <p class="learn-org">Университет Иннополис</p>
+                            <p class="learn-desc">ИИ и анализ данных. Машинное обучение, нейронные сети и практическое применение ML.</p>
+                            <a href="Сертификаты/b4c8f1a3_innopolis_ai.pdf" class="learn-link" target="_blank" rel="noopener">Посмотреть сертификат</a>
+                        </div>
+                    </div>
+                </article>
 
-                <!-- Сертификат 2: МФТИ Технологии программирования и ОС -->
-                <div class="certificate-card fade-in">
-                    <div class="certificate-icon">💻</div>
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Технологии программирования и операционные системы</h3>
-                        <span class="certificate-year">2026</span>
+                <!-- Statoplan -->
+                <article class="learn-card fade-in" data-learn data-carousel-item>
+                    <div class="learn-card-head">
+                        <span class="learn-logo learn-logo-statoplan" aria-hidden="true">
+                            <img class="learn-logo-img" src="https://yt3.googleusercontent.com/ytc/AIdro_kaE582y0VJQWAucblcFBZzGPX5ieKOO_dh0feS5lUKjSw=s900-c-k-c0x00ffffff-no-rj" alt="Стратоплан" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <span class="learn-logo-fallback">Стратоплан</span>
+                        </span>
+                        <span class="learn-label">Управление техническими командами</span>
+                        <span class="learn-year mono">2024</span>
                     </div>
-                    <p class="certificate-organization">Московский физико-технический институт (МФТИ)</p>
-                    <p class="certificate-description">Удостоверение о повышении квалификации. Изучение современных технологий программирования, архитектурных паттернов и принципов работы операционных систем.</p>
-                    <a href="Сертификаты/МФТИ/i2e8g6d4_mipt_certificate_os.pdf" class="certificate-link" target="_blank" rel="noopener">
-                        <span>📄</span> Посмотреть удостоверение
-                    </a>
-                </div>
-
-                <!-- Сертификат 3: МФТИ -->
-                <div class="certificate-card fade-in">
-                    <div class="certificate-icon">☕</div>
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Технологии программирования на Java</h3>
-                        <span class="certificate-year">2025</span>
+                    <div class="learn-card-body">
+                        <div class="learn-card-inner">
+                            <span class="learn-badge">Обучение</span>
+                            <p class="learn-org">Statoplan Management School</p>
+                            <p class="learn-desc">Agile/Scrum, управление проектами и бизнес-анализ.</p>
+                            <div class="learn-links">
+                                <a href="Сертификаты/e5a2c9f1_statoplan_theory.pdf" class="learn-link" target="_blank" rel="noopener">Сертификат (теория)</a>
+                                <a href="Сертификаты/f8b3d7e2_statoplan_practice.pdf" class="learn-link" target="_blank" rel="noopener">Сертификат (практика)</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="certificate-organization">Московский физико-технический институт (МФТИ)</p>
-                    <p class="certificate-description">Удостоверение о повышении квалификации по технологиям программирования на Java. Освоение современных практик разработки, многопоточности и функционального программирования.</p>
-                    <a href="Сертификаты/МФТИ/g7c4e2a1_mipt_certificate.pdf" class="certificate-link" target="_blank" rel="noopener">
-                        <span>📄</span> Посмотреть удостоверение
-                    </a>
-                </div>
-
-                <!-- Сертификат 4: Иннополис AI -->
-                <div class="certificate-card fade-in">
-                    <div class="certificate-icon">🤖</div>
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Технологии ИИ и анализа данных</h3>
-                        <span class="certificate-year">2023</span>
-                    </div>
-                    <p class="certificate-organization">Университет Иннополис</p>
-                    <p class="certificate-description">Программа повышения квалификации в области искусственного интеллекта и анализа данных. Изучение машинного обучения, нейронных сетей и практическое применение ML-моделей.</p>
-                    <a href="Сертификаты/b4c8f1a3_innopolis_ai.pdf" class="certificate-link" target="_blank" rel="noopener">
-                        <span>📄</span> Посмотреть сертификат
-                    </a>
-                </div>
-
-                <!-- Сертификат 5: Statoplan Management School -->
-                <div class="certificate-card fade-in">
-                    <div class="certificate-icon">📊</div>
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Управление техническими командами</h3>
-                        <span class="certificate-year">2024</span>
-                    </div>
-                    <p class="certificate-organization">Statoplan Management School</p>
-                    <p class="certificate-description">Программа обучения по управлению техническими командами. Освоение методологий Agile/Scrum, управление проектами и бизнес-анализ.</p>
-                    <div class="certificate-files">
-                        <a href="Сертификаты/e5a2c9f1_statoplan_theory.pdf" class="certificate-link" target="_blank" rel="noopener">
-                            <span>📄</span> Сертификат (теория)
-                        </a>
-                        <a href="Сертификаты/f8b3d7e2_statoplan_practice.pdf" class="certificate-link" target="_blank" rel="noopener">
-                            <span>📄</span> Сертификат (практика)
-                        </a>
+                </article>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container contact-content">
-            <h2 class="contact-title fade-in">Готов обсудить ваш проект</h2>
-            <p class="contact-subtitle fade-in">
-                Открыт для интересных предложений и фриланс-заказов.
-                Свяжитесь удобным способом — отвечу в течение дня.
-            </p>
-            <div class="contact-links">
-                <a href="https://t.me/YaroshNikita" class="contact-link" target="_blank" rel="noopener" aria-label="Telegram">
-                    <span class="icon">✈️</span>
-                    <span>Telegram</span>
-                </a>
-                <a href="mailto:yarosh.nv@yandex.ru" class="contact-link contact-email" id="emailLink" aria-label="Email">
-                    <span class="icon">📧</span>
-                    <span>yarosh.nv@yandex.ru</span>
-                </a>
-            </div>
-            <div class="contact-cta fade-in">
-                <a href="a7f3e9d2_resume.pdf" class="btn-primary" download>
-                    <span>📄</span> Скачать резюме (PDF)
-                </a>
-            </div>
-        </div>
-    </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Footer — контакты и резюме -->
+    <footer class="footer" id="contact">
         <div class="container footer-content">
-            <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
-            <div class="footer-links">
-                <a href="https://t.me/YaroshNikita" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-                <a href="mailto:yarosh.nv@yandex.ru" aria-label="Email">Email</a>
-                <a href="https://github.com/yarosh-nv" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+            <div class="footer-actions">
+                <a href="https://t.me/YaroshNikita" class="footer-action" target="_blank" rel="noopener" aria-label="Telegram">
+                    <span class="footer-action-icon">✈️</span>
+                    <span>Telegram</span>
+                </a>
+                <a href="mailto:yarosh.nv@yandex.ru" class="footer-action footer-email" id="emailLink" aria-label="Email">
+                    <span class="footer-action-icon">📧</span>
+                    <span>yarosh.nv@yandex.ru</span>
+                </a>
+                <a href="a7f3e9d2_resume.pdf" class="footer-action footer-action-cta" download>
+                    <span class="footer-action-icon">📄</span>
+                    <span>Скачать резюме (PDF)</span>
+                </a>
             </div>
+            <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
         </div>
     </footer>
 
     <!-- ============================================
          SCRIPTS
          ============================================ -->
-    <script src="js/main.js?v=1.0.0"></script>
+    <script src="js/main.js?v=2.0.0"></script>
 </body>
 </html>

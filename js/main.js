@@ -8,21 +8,12 @@ const CONFIG = {
     HEADER_HEIGHT: 70,
     ACTIVE_SECTION_OFFSET: 100,         // Смещение для определения активной секции
 
-    STORAGE_KEYS: {
-        THEME: 'theme'
-    },
-    THEMES: {
-        DARK: 'dark',
-        LIGHT: 'light'
-    },
     SELECTORS: {
         EMAIL_LINK: 'emailLink',
-        THEME_TOGGLE: 'themeToggle',
         MOBILE_MENU_BTN: 'mobile-menu-btn',
         NAV_LINKS: 'nav-links',
         HAMBURGER: 'hamburger',
         NAV_ACTIONS: 'nav-actions',
-        READING_PROGRESS: 'readingProgress',
         BACK_TO_TOP: 'backToTop',
         TYPEWRITER_CODE: 'typewriterCode'
     },
@@ -48,35 +39,6 @@ const CONFIG = {
     // File versions for cache busting
     VERSION: '1.0.0'
 };
-
-/* ============================================
-   THEME TOGGLE
-   ============================================ */
-function initThemeToggle() {
-    const themeToggle = document.getElementById(CONFIG.SELECTORS.THEME_TOGGLE);
-    const htmlElement = document.documentElement;
-
-    if (!themeToggle) return;
-
-    // Load saved theme or default to dark
-    const savedTheme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME) || CONFIG.THEMES.DARK;
-    htmlElement.setAttribute('data-theme', savedTheme);
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === CONFIG.THEMES.DARK ? CONFIG.THEMES.LIGHT : CONFIG.THEMES.DARK;
-
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, newTheme);
-
-        // Add transition class for smooth theme change
-        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-        setTimeout(() => {
-            document.body.style.transition = '';
-        }, 300);
-    });
-}
 
 /* ============================================
    MOBILE MENU TOGGLE
@@ -156,11 +118,23 @@ function setActiveSection() {
    SMOOTH SCROLL FOR ANCHOR LINKS
    ============================================ */
 function initSmoothScroll() {
+    const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
+    const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
+    const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
+    const overlay = document.getElementById('mobileOverlay');
+
+    function closeMobileMenu() {
+        if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+        if (overlay) overlay.classList.remove(CONFIG.CLASSES.ACTIVE);
+        document.body.style.overflow = '';
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
 
-            // Skip if it's just "#" or external link
             if (href === '#' || !href.startsWith('#')) return;
 
             e.preventDefault();
@@ -171,6 +145,7 @@ function initSmoothScroll() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                closeMobileMenu();
             }
         });
     });
@@ -228,18 +203,6 @@ function initFadeInAnimation() {
 }
 
 /* ============================================
-   READING PROGRESS BAR
-   ============================================ */
-function updateReadingProgress() {
-    const readingProgress = document.getElementById(CONFIG.SELECTORS.READING_PROGRESS);
-    if (!readingProgress) return;
-
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    readingProgress.style.width = scrolled + '%';
-}
-
-/* ============================================
    BACK TO TOP BUTTON
    ============================================ */
 function initBackToTop() {
@@ -276,7 +239,7 @@ const CODE_LINES = [
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setAge</span>(<span class="number">23</span>);', delay: 1200 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setStack</span>(', delay: 1500 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Java 21"</span>, <span class="string">"Spring Boot"</span>,', delay: 1800 },
-    { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostgreSQL"</span>, <span class="string"><span class="string">"AI/ML"</span>', delay: 2100 },
+    { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostgreSQL"</span>, <span class="string">"AI/ML"</span>', delay: 2100 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;);', delay: 2400 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setExperience</span>(<span class="string">"3+ года"</span>);', delay: 2700 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Open for freelance opportunities</span>', delay: 3000 },
@@ -394,19 +357,156 @@ function initLazyLoading() {
 }
 
 /* ============================================
+   LEARNING — карусель: одна карточка, автолистание, пауза при наведении
+   ============================================ */
+function initLearnCarousel() {
+    const carousel = document.querySelector('.learn-carousel[data-carousel]');
+    if (!carousel) return;
+    const viewport = carousel.querySelector('.learn-carousel-viewport');
+    const track = carousel.querySelector('.learn-carousel-track');
+    const items = Array.from(carousel.querySelectorAll('[data-carousel-item]'));
+    const total = items.length;
+    if (!viewport || !track || total === 0) return;
+
+    const prevBtn = carousel.querySelector('.learn-carousel-prev');
+    const nextBtn = carousel.querySelector('.learn-carousel-next');
+
+    let currentIndex = 0;
+    const AUTO_PLAY_MS = 4500;
+    let autoPlayId = null;
+
+    function updateLayout() {
+        const w = viewport.offsetWidth;
+        track.style.width = total * w + 'px';
+        items.forEach((el) => {
+            el.style.flex = `0 0 ${w}px`;
+            el.style.minWidth = '0';
+        });
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${currentIndex * w}px)`;
+        requestAnimationFrame(() => { track.style.transition = ''; });
+    }
+
+    function updateCardStates() {
+        items.forEach((el, i) => {
+            el.classList.toggle('is-center', i === currentIndex);
+            el.classList.remove('is-prev', 'is-next');
+        });
+    }
+
+    function goTo(index) {
+        currentIndex = (index + total) % total;
+        const w = viewport.offsetWidth;
+        track.style.transform = `translateX(-${currentIndex * w}px)`;
+        updateCardStates();
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayId = setInterval(() => {
+            goTo(currentIndex + 1);
+        }, AUTO_PLAY_MS);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayId != null) {
+            clearInterval(autoPlayId);
+            autoPlayId = null;
+        }
+    }
+
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+    /* Свайп на мобильных */
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const SWIPE_MIN = 50;
+    viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) < SWIPE_MIN) return;
+        if (diff > 0) goTo(currentIndex + 1);
+        else goTo(currentIndex - 1);
+    }, { passive: true });
+
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(updateLayout) : null;
+    if (ro) ro.observe(viewport);
+    window.addEventListener('resize', updateLayout);
+
+    updateLayout();
+    updateCardStates();
+    goTo(0);
+    startAutoPlay();
+}
+
+/* Скелетон логотипов обучения: показывать fallback до загрузки img */
+function initLearningLogos() {
+    document.querySelectorAll('.learn-logo').forEach(logo => {
+        const img = logo.querySelector('.learn-logo-img');
+        const fallback = logo.querySelector('.learn-logo-fallback');
+        if (!img || !fallback) return;
+        if (img.complete && img.naturalWidth > 0) {
+            logo.classList.add('img-loaded');
+            return;
+        }
+        img.addEventListener('load', () => logo.classList.add('img-loaded'));
+        img.addEventListener('error', () => {
+            fallback.classList.add('is-visible');
+            logo.classList.add('img-loaded');
+        });
+    });
+}
+
+function initLearnCards() {
+    const container = document.querySelector('.learn-carousel') || document.querySelector('.learn-cards-grid');
+    if (!container || container.hasAttribute('data-carousel')) return;
+    const cards = container.querySelectorAll('[data-learn]');
+    cards.forEach(card => {
+        const head = card.querySelector('.learn-card-head');
+        if (!head || head.tagName !== 'BUTTON') return;
+        head.addEventListener('click', () => {
+            const wasOpen = card.classList.contains('is-open');
+            cards.forEach((other) => {
+                other.classList.remove('is-open');
+                const otherHead = other.querySelector('.learn-card-head');
+                if (otherHead) otherHead.setAttribute('aria-expanded', 'false');
+            });
+            if (!wasOpen) {
+                card.classList.add('is-open');
+                head.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+}
+
+/* ============================================
    KEYBOARD NAVIGATION
    ============================================ */
 function initKeyboardNavigation() {
     document.addEventListener('keydown', (e) => {
-        // Close mobile menu on Escape
         if (e.key === 'Escape') {
             const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
             const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
             const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
-            
             if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+
+            const openCard = document.querySelector('.learn-card.is-open');
+            if (openCard) {
+                const head = openCard.querySelector('.learn-card-head');
+                if (head && head.tagName === 'BUTTON') {
+                    openCard.classList.remove('is-open');
+                    head.setAttribute('aria-expanded', 'false');
+                }
+            }
         }
     });
 }
@@ -424,9 +524,6 @@ function handleScroll() {
             header.classList.remove(CONFIG.CLASSES.SCROLLED);
         }
     }
-
-    // Update reading progress
-    updateReadingProgress();
 
     // Update active section
     setActiveSection();
@@ -446,11 +543,9 @@ function handleScroll() {
    CONSOLE EASTER EGG
    ============================================ */
 function logEasterEgg() {
-    console.log('%c👋 Привет, разработчик!', 'color: #6db33f; font-size: 20px; font-weight: bold;');
-    console.log('%cИщешь код этого сайта? CSS в /css/style.css, JS в /js/main.js', 'color: #abb2bf; font-size: 14px;');
-    console.log('%c☕ Java 21 | 🌱 Spring Boot | 🤖 AI/ML', 'color: #e76f00; font-size: 14px;');
-    console.log('%c🌓 Попробуй переключить тему (кнопка справа в хедере)!', 'color: #569cd6; font-size: 14px;');
-    console.log('%c📊 Progress bar сверху показывает сколько ты уже прочитал!', 'color: #4ec9b0; font-size: 14px;');
+    console.log('%c👋 Привет, разработчик!', 'color: #c8ff00; font-size: 20px; font-weight: bold;');
+    console.log('%cСайт собран в духе дерзких студий. CSS: /css/, JS: /js/main.js', 'color: #a1a1aa; font-size: 14px;');
+    console.log('%c☕ Java 21 | 🌱 Spring Boot | 🤖 AI/ML', 'color: #f97316; font-size: 14px;');
 }
 
 /* ============================================
@@ -458,10 +553,12 @@ function logEasterEgg() {
    ============================================ */
 function init() {
     // Initialize all modules
-    initThemeToggle();
     initMobileMenu();
     initSmoothScroll();
     initEmailCopy();
+    initLearnCarousel();
+    initLearningLogos();
+    initLearnCards();
     initFadeInAnimation();
     initLazyLoading();
     initBackToTop();
