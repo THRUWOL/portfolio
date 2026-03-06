@@ -19,8 +19,9 @@
     padding: 14px 24px;
     text-decoration: none;
     font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    border-radius: 0 0 6px 0;
+    font-weight: 800;
+    border: var(--border-width) solid var(--accent);
+    border-radius: 0;
 }
 
 .skip-to-content:focus {
@@ -30,19 +31,34 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--text-inverse);
 }
 
 /* ============================================
-   CUSTOM SCROLLBAR
+   CUSTOM SCROLLBAR — скрыт для страницы, виден для блоков (код, карусель)
    ============================================ */
 ::-webkit-scrollbar {
     width: 8px;
@@ -67,9 +83,9 @@ body {
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
 }
 
 .mono {
@@ -87,9 +103,9 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 .container {
     width: 100%;
-    max-width: min(var(--container-wide), 96vw);
+    max-width: var(--container-wide);
     margin: 0 auto;
-    padding: 0 clamp(24px, 4vw, 48px);
+    padding: 0 clamp(20px, 2.5vw, 40px);
 }
 
 section {

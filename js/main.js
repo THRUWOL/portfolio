@@ -8,21 +8,12 @@ const CONFIG = {
     HEADER_HEIGHT: 70,
     ACTIVE_SECTION_OFFSET: 100,         // Смещение для определения активной секции
 
-    STORAGE_KEYS: {
-        THEME: 'theme'
-    },
-    THEMES: {
-        DARK: 'dark',
-        LIGHT: 'light'
-    },
     SELECTORS: {
         EMAIL_LINK: 'emailLink',
-        THEME_TOGGLE: 'themeToggle',
         MOBILE_MENU_BTN: 'mobile-menu-btn',
         NAV_LINKS: 'nav-links',
         HAMBURGER: 'hamburger',
         NAV_ACTIONS: 'nav-actions',
-        READING_PROGRESS: 'readingProgress',
         BACK_TO_TOP: 'backToTop',
         TYPEWRITER_CODE: 'typewriterCode'
     },
@@ -48,40 +39,6 @@ const CONFIG = {
     // File versions for cache busting
     VERSION: '1.0.0'
 };
-
-/* ============================================
-   THEME TOGGLE
-   ============================================ */
-function initThemeToggle() {
-    const themeToggle = document.getElementById(CONFIG.SELECTORS.THEME_TOGGLE);
-    const htmlElement = document.documentElement;
-
-    if (!themeToggle) return;
-
-    // Load saved theme or default to light
-    const savedTheme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME) || CONFIG.THEMES.LIGHT;
-    htmlElement.setAttribute('data-theme', savedTheme);
-    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.setAttribute('content', savedTheme === CONFIG.THEMES.DARK ? '#0c0c0d' : '#faf9f7');
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === CONFIG.THEMES.DARK ? CONFIG.THEMES.LIGHT : CONFIG.THEMES.DARK;
-
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, newTheme);
-
-        const themeColor = document.querySelector('meta[name="theme-color"]');
-        if (themeColor) themeColor.setAttribute('content', newTheme === CONFIG.THEMES.DARK ? '#0c0c0d' : '#faf9f7');
-
-        // Add transition class for smooth theme change
-        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-        setTimeout(() => {
-            document.body.style.transition = '';
-        }, 300);
-    });
-}
 
 /* ============================================
    MOBILE MENU TOGGLE
@@ -230,18 +187,6 @@ function initFadeInAnimation() {
     fadeElements.forEach(element => {
         observer.observe(element);
     });
-}
-
-/* ============================================
-   READING PROGRESS BAR
-   ============================================ */
-function updateReadingProgress() {
-    const readingProgress = document.getElementById(CONFIG.SELECTORS.READING_PROGRESS);
-    if (!readingProgress) return;
-
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    readingProgress.style.width = scrolled + '%';
 }
 
 /* ============================================
@@ -534,9 +479,6 @@ function handleScroll() {
         }
     }
 
-    // Update reading progress
-    updateReadingProgress();
-
     // Update active section
     setActiveSection();
 
@@ -558,8 +500,6 @@ function logEasterEgg() {
     console.log('%c👋 Привет, разработчик!', 'color: #c8ff00; font-size: 20px; font-weight: bold;');
     console.log('%cСайт собран в духе дерзких студий. CSS: /css/, JS: /js/main.js', 'color: #a1a1aa; font-size: 14px;');
     console.log('%c☕ Java 21 | 🌱 Spring Boot | 🤖 AI/ML', 'color: #f97316; font-size: 14px;');
-    console.log('%c🌓 Переключи тему — кнопка в хедере', 'color: #3b82f6; font-size: 14px;');
-    console.log('%c📊 Полоска сверху = прогресс чтения страницы', 'color: #22c55e; font-size: 14px;');
 }
 
 /* ============================================
@@ -567,7 +507,6 @@ function logEasterEgg() {
    ============================================ */
 function init() {
     // Initialize all modules
-    initThemeToggle();
     initMobileMenu();
     initSmoothScroll();
     initEmailCopy();

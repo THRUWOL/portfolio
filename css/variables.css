@@ -1,119 +1,88 @@
 /* ============================================
-   PREMIUM DESIGN SYSTEM
+   BOLD PREMIUM — в духе Лебедева
+   Чёрный, белый, один ударный акцент. Острые формы.
    ============================================ */
 
 :root {
+    /* Core — тёплые нейтрали */
+    --black: #0f0e0d;
+    --white: #fefdfb;
+    --offwhite: #f6f4f0;
+    --gray-100: #e6e4df;
+    --gray-200: #9c9994;
+    --gray-300: #6b6764;
+
     /* Surfaces */
-    --bg-primary: #fafaf9;
-    --bg-secondary: #f5f4f2;
-    --bg-tertiary: #ebeae8;
-    --bg-card: #ffffff;
-    --bg-elevated: #ffffff;
+    --bg-primary: var(--white);
+    --bg-secondary: var(--offwhite);
+    --bg-tertiary: var(--gray-100);
+    --bg-card: var(--white);
+    --bg-elevated: var(--white);
 
     /* Text */
-    --text-primary: #181716;
-    --text-secondary: #57534e;
-    --text-muted: #78716c;
-    --text-inverse: #fafaf9;
+    --text-primary: var(--black);
+    --text-secondary: #3d3b38;
+    --text-muted: var(--gray-300);
+    --text-inverse: #fefdfb;
 
-    /* Accent */
-    --accent: #25633d;
-    --accent-dim: rgba(37, 99, 61, 0.1);
+    /* Accent — медно-янтарный */
+    --accent: #b45309;
+    --accent-dim: rgba(180, 83, 9, 0.14);
+    --accent-hover: #92400e;
+    --gradient-accent: linear-gradient(135deg, #b45309 0%, #d97706 100%);
     --accent-java: #b45309;
-    --accent-spring: #166534;
+    --accent-spring: #15803d;
     --accent-blue: #1d6dc2;
     --accent-cyan: #0e7c8c;
     --accent-purple: #6d28d9;
     --accent-pink: #be185d;
     --accent-red: #b91c1c;
 
-    /* Borders */
-    --border-color: rgba(24, 23, 22, 0.06);
-    --border-strong: rgba(24, 23, 22, 0.12);
-    --scrollbar-bg: #f5f4f2;
-    --scrollbar-thumb: #d6d3d1;
-    --scrollbar-thumb-hover: #a8a29e;
+    /* Borders — тёплый подтон */
+    --border-width: 2px;
+    --border-width-thick: 4px;
+    --border-color: rgba(15, 14, 13, 0.08);
+    --border-strong: rgba(15, 14, 13, 0.16);
+    --scrollbar-bg: var(--gray-100);
+    --scrollbar-thumb: var(--gray-200);
+    --scrollbar-thumb-hover: var(--gray-300);
 
-    /* Shadows — единая шкала */
-    --shadow-xs: 0 1px 2px rgba(24, 23, 22, 0.04);
-    --shadow-sm: 0 2px 8px rgba(24, 23, 22, 0.06), 0 0 0 1px rgba(24, 23, 22, 0.04);
-    --shadow-md: 0 4px 20px rgba(24, 23, 22, 0.08), 0 0 0 1px rgba(24, 23, 22, 0.04);
-    --shadow-lg: 0 12px 40px rgba(24, 23, 22, 0.1), 0 0 0 1px rgba(24, 23, 22, 0.04);
-    --shadow-glow: 0 0 24px rgba(37, 99, 61, 0.15);
-    --glow-accent: 0 0 32px rgba(37, 99, 61, 0.2);
+    /* Shadows — лёгкий тёплый оттенок */
+    --shadow-xs: 0 1px 2px rgba(15, 14, 13, 0.05);
+    --shadow-sm: 0 2px 8px rgba(15, 14, 13, 0.07);
+    --shadow-md: 0 8px 24px rgba(15, 14, 13, 0.09);
+    --shadow-lg: 0 16px 48px rgba(15, 14, 13, 0.1);
+    --shadow-xl: 0 24px 64px rgba(15, 14, 13, 0.12);
+    --shadow-glow: 0 0 0 var(--border-width) var(--accent);
+    --glow-accent: 0 0 32px rgba(180, 83, 9, 0.22);
 
     /* Motion */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
     --transition-fast: 0.2s var(--ease-in-out);
-    --transition-normal: 0.3s var(--ease-out-expo);
-    --transition-slow: 0.5s var(--ease-out-expo);
+    --transition-normal: 0.28s var(--ease-out-expo);
+    --transition-slow: 0.45s var(--ease-out-expo);
 
-    /* Layout */
-    --header-height: 72px;
-    --container-narrow: 680px;
-    --container-wide: 1440px;
-    --section-padding: clamp(72px, 12vw, 128px);
-    --section-title-gap: clamp(40px, 6vw, 64px);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --card-radius: var(--radius-lg);
-    --card-padding: 28px;
-    --shadow-card: var(--shadow-sm);
-    --shadow-card-hover: var(--shadow-md);
-    --learn-card-radius: var(--radius-lg);
+    /* Layout — острые углы */
+    --header-height: 64px;
+    --container-narrow: 720px;
+    --container-wide: min(1720px, 98vw);
+    --section-padding: clamp(64px, 10vw, 120px);
+    --section-title-gap: clamp(48px, 8vw, 80px);
+    --radius-sm: 0;
+    --radius-md: 4px;
+    --radius-lg: 4px;
+    --radius-xl: 8px;
+    --card-radius: 0;
+    --card-padding: 32px;
+    --learn-card-radius: 0;
 
     /* Code */
-    --code-bg: #f5f4f2;
-    --code-border: rgba(24, 23, 22, 0.06);
+    --code-bg: #1c1917;
+    --code-border: rgba(254, 253, 251, 0.06);
     --code-comment: #78716c;
 
-    --progress-height: 2px;
+    --progress-height: 4px;
     --mobile-breakpoint: 768px;
     --small-mobile: 480px;
-}
-
-[data-theme="dark"] {
-    --bg-primary: #0c0c0c;
-    --bg-secondary: #141414;
-    --bg-tertiary: #1c1c1c;
-    --bg-card: #171717;
-    --bg-elevated: #1f1f1f;
-
-    --text-primary: #fafaf9;
-    --text-secondary: #a8a29e;
-    --text-muted: #78716c;
-    --text-inverse: #0c0c0c;
-
-    --accent: #4ade80;
-    --accent-dim: rgba(74, 222, 128, 0.12);
-    --accent-java: #fb923c;
-    --accent-spring: #22c55e;
-    --accent-blue: #60a5fa;
-    --accent-cyan: #22d3ee;
-    --accent-purple: #a78bfa;
-    --accent-pink: #f472b6;
-    --accent-red: #f87171;
-
-    --border-color: rgba(255, 255, 255, 0.06);
-    --border-strong: rgba(255, 255, 255, 0.1);
-    --scrollbar-bg: #0c0c0c;
-    --scrollbar-thumb: #404040;
-    --scrollbar-thumb-hover: #525252;
-
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.04);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
-    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
-    --shadow-glow: 0 0 24px rgba(74, 222, 128, 0.12);
-    --glow-accent: 0 0 32px rgba(74, 222, 128, 0.15);
-
-    --code-bg: #141414;
-    --code-border: rgba(255, 255, 255, 0.06);
-    --code-comment: #78716c;
-    --shadow-card: var(--shadow-sm);
-    --shadow-card-hover: var(--shadow-md);
-    --learn-card-radius: var(--radius-lg);
 }
