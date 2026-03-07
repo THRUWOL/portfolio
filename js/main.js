@@ -3,7 +3,7 @@
    ============================================ */
 const CONFIG = {
     // Scroll thresholds (pixels)
-    SCROLL_THRESHOLD: 500,              // Показ кнопки "наверх" после этого значения
+    SCROLL_THRESHOLD: 900,              // Показ кнопки "наверх" после прохождения Hero
     HEADER_SCROLL_THRESHOLD: 50,        // Порог для тени хедера
     HEADER_HEIGHT: 70,
     ACTIVE_SECTION_OFFSET: 100,         // Смещение для определения активной секции
@@ -33,7 +33,8 @@ const CONFIG = {
         GITHUB: 'https://github.com/yarosh-nv',
         PHONE: '+7-978-853-28-36',
         NAME: 'Ярош Никита',
-        POSITION: 'Java Backend Developer'
+        POSITION: 'Java Backend Developer',
+        RESUME_URL: 'a7f3e9d2_resume.pdf'
     },
 
     // File versions for cache busting
@@ -152,6 +153,38 @@ function initSmoothScroll() {
 }
 
 /* ============================================
+   FOOTER — одна точка правды для контактов (CONFIG.CONTACT)
+   ============================================ */
+function initFooterContacts() {
+    const telegramLink = document.getElementById('telegramLink');
+    const emailLink = document.getElementById('emailLink');
+    const emailText = document.getElementById('emailLinkText');
+    const resumeLink = document.getElementById('resumeLink');
+    const c = CONFIG.CONTACT;
+    if (telegramLink) telegramLink.href = c.TELEGRAM;
+    if (emailLink) emailLink.href = 'mailto:' + c.EMAIL;
+    if (emailText) emailText.textContent = c.EMAIL;
+    if (resumeLink && c.RESUME_URL) resumeLink.href = c.RESUME_URL;
+    const heroResume = document.getElementById('heroResumeLink');
+    if (heroResume && c.RESUME_URL) heroResume.href = c.RESUME_URL;
+}
+
+/* ============================================
+   RESUME DOWNLOAD — микро-фидбек
+   ============================================ */
+function initResumeFeedback() {
+    const resumeLink = document.getElementById('resumeLink');
+    if (!resumeLink) return;
+    const textEl = resumeLink.querySelector('.resume-link-text');
+    const defaultText = resumeLink.dataset.resumeText || 'Скачать резюме (PDF)';
+    resumeLink.addEventListener('click', () => {
+        if (!textEl) return;
+        textEl.textContent = 'Скачивание…';
+        setTimeout(() => { textEl.textContent = defaultText; }, 2500);
+    });
+}
+
+/* ============================================
    EMAIL COPY FUNCTIONALITY
    ============================================ */
 function initEmailCopy() {
@@ -250,7 +283,8 @@ const CODE_LINES = [
 function typeCode() {
     const typewriterContainer = document.getElementById(CONFIG.SELECTORS.TYPEWRITER_CODE);
     if (!typewriterContainer || typewriterContainer.dataset.animated === 'true') return;
-    
+    const skeleton = document.getElementById('codeSkeleton');
+    if (skeleton) skeleton.remove();
     typewriterContainer.dataset.animated = 'true';
     typewriterContainer.innerHTML = '';
 
@@ -373,9 +407,11 @@ function initLearnCarousel() {
     let currentIndex = 0;
     const AUTO_PLAY_MS = 4500;
     let autoPlayId = null;
+    const TRANSITION_DURATION = 0.4;
+    function getW() { return viewport.offsetWidth; }
 
     function updateLayout() {
-        const w = viewport.offsetWidth;
+        const w = getW();
         track.style.width = total * w + 'px';
         items.forEach((el) => {
             el.style.flex = `0 0 ${w}px`;
@@ -402,12 +438,17 @@ function initLearnCarousel() {
         });
     }
 
-    function goTo(index) {
+    function goTo(index, moveFocus) {
         currentIndex = (index + total) % total;
-        const w = viewport.offsetWidth;
+        const w = getW();
+        track.style.transition = `transform ${TRANSITION_DURATION}s var(--ease-out-expo)`;
         track.style.transform = `translateX(-${currentIndex * w}px)`;
         updateCardStates();
         updateDots();
+        if (moveFocus && items[currentIndex]) {
+            items[currentIndex].setAttribute('tabindex', '-1');
+            items[currentIndex].focus({ preventScroll: true });
+        }
     }
 
     function startAutoPlay() {
@@ -434,24 +475,46 @@ function initLearnCarousel() {
             dot.className = 'learn-carousel-dot' + (i === 0 ? ' is-active' : '');
             dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
             dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-            dot.addEventListener('click', () => goTo(i));
+            dot.addEventListener('click', () => goTo(i, true));
             dotsContainer.appendChild(dot);
         }
     }
 
-    /* Свайп на мобильных */
+    /* Свайп с тянущим следом за пальцем */
     let touchStartX = 0;
-    let touchEndX = 0;
-    const SWIPE_MIN = 50;
+    let isDragging = false;
+    const SWIPE_MIN = 40;
     viewport.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+        stopAutoPlay();
+        track.style.transition = 'none';
+    }, { passive: true });
+    viewport.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const w = getW();
+        const dx = e.touches[0].clientX - touchStartX;
+        const base = -currentIndex * w;
+        let next = base + dx;
+        const min = -((total - 1) * w);
+        next = Math.max(min, Math.min(0, next));
+        track.style.transform = `translateX(${next}px)`;
     }, { passive: true });
     viewport.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+        if (!isDragging) return;
+        isDragging = false;
+        const touchEndX = e.changedTouches[0].clientX;
         const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) < SWIPE_MIN) return;
-        if (diff > 0) goTo(currentIndex + 1);
-        else goTo(currentIndex - 1);
+        const w = getW();
+        track.style.transition = `transform ${TRANSITION_DURATION}s var(--ease-out-expo)`;
+        if (Math.abs(diff) > SWIPE_MIN) {
+            if (diff > 0) goTo(currentIndex + 1, false);
+            else goTo(currentIndex - 1, false);
+        } else {
+            track.style.transform = `translateX(-${currentIndex * w}px)`;
+        }
+        startAutoPlay();
     }, { passive: true });
 
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(updateLayout) : null;
@@ -571,10 +634,11 @@ function logEasterEgg() {
    INITIALIZATION
    ============================================ */
 function init() {
-    // Initialize all modules
+    initFooterContacts();
     initMobileMenu();
     initSmoothScroll();
     initEmailCopy();
+    initResumeFeedback();
     initLearnCarousel();
     initLearningLogos();
     initLearnCards();
