@@ -622,6 +622,62 @@ function handleScroll() {
 }
 
 /* ============================================
+   CARD TILT — 3D tilt on hover (expertise + experience)
+   ============================================ */
+function initCardTilt() {
+    const cards = document.querySelectorAll('.expertise-card');
+    const TILT_MAX = 8;
+
+    cards.forEach(card => {
+        const isExpertise = card.classList.contains('expertise-card');
+        const hoverTranslate = isExpertise ? 'translateY(-4px)' : 'translateX(6px)';
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            const rotateY = (x - 0.5) * TILT_MAX * 2;
+            const rotateX = (y - 0.5) * -TILT_MAX * 1.2;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${hoverTranslate}`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+/* ============================================
+   DYNAMIC TAB TITLE — on focus/blur
+   ============================================ */
+function initDynamicTitle() {
+    const defaultTitle = document.title;
+    const unfocusedTitle = '(1) Никита Ярош | Open for work';
+
+    function setTitle(isFocused) {
+        document.title = isFocused ? defaultTitle : unfocusedTitle;
+    }
+
+    if (typeof document.hidden !== 'undefined') {
+        setTitle(!document.hidden);
+        document.addEventListener('visibilitychange', () => {
+            setTitle(!document.hidden);
+        });
+    }
+    window.addEventListener('blur', () => setTitle(false));
+    window.addEventListener('focus', () => setTitle(true));
+}
+
+/* ============================================
+   HERO CURSOR — hide blinking cursor after 2s
+   ============================================ */
+function initHeroCursor() {
+    const cursor = document.querySelector('.hero-cursor');
+    if (!cursor) return;
+    const t = setTimeout(() => {
+        cursor.classList.add('hero-cursor-hidden');
+    }, 2000);
+}
+
+/* ============================================
    CONSOLE EASTER EGG
    ============================================ */
 function logEasterEgg() {
@@ -646,6 +702,9 @@ function init() {
     initLazyLoading();
     initBackToTop();
     initTypewriter();
+    initHeroCursor();
+    initCardTilt();
+    initDynamicTitle();
     initKeyboardNavigation();
     logEasterEgg();
 
