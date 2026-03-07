@@ -168,7 +168,7 @@
                     <li><a href="#about">Обо мне</a></li>
                     <li><a href="#expertise">Экспертиза</a></li>
                     <li><a href="#experience">Опыт</a></li>
-                    <li><a href="#learning">Обучение</a></li>
+                    <li><a href="#learning">Образование</a></li>
                     <li><a href="#contact" class="mobile-contact-link">Связаться</a></li>
                 </ul>
                 <div class="nav-actions">
@@ -445,22 +445,16 @@
         </div>
     </section>
 
-    <!-- Learning Section — карусель с логотипами -->
+    <!-- Образование — карусель с точками -->
     <section class="learning" id="learning">
         <div class="container">
             <div class="section-title fade-in" data-num="04">
                 <span class="section-num mono">04</span>
-                <h2>Обучение</h2>
-                <p>Листайте карусель — в карточке сразу видна вся информация</p>
+                <h2>Образование</h2>
+                <p>Дипломы и сертификаты</p>
             </div>
 
-            <div class="learn-carousel" data-carousel>
-                <button type="button" class="learn-carousel-btn learn-carousel-prev" aria-label="Предыдущая карточка">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-                <button type="button" class="learn-carousel-btn learn-carousel-next" aria-label="Следующая карточка">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
+            <div class="learn-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Образование">
                 <div class="learn-carousel-viewport">
                     <div class="learn-carousel-track">
                 <!-- КФУ — Магистр -->
@@ -608,6 +602,7 @@
                 </article>
                     </div>
                 </div>
+                <div class="learn-carousel-dots" id="learnCarouselDots" aria-label="Переключение слайдов"></div>
             </div>
         </div>
     </section>

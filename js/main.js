@@ -368,8 +368,7 @@ function initLearnCarousel() {
     const total = items.length;
     if (!viewport || !track || total === 0) return;
 
-    const prevBtn = carousel.querySelector('.learn-carousel-prev');
-    const nextBtn = carousel.querySelector('.learn-carousel-next');
+    const dotsContainer = carousel.querySelector('#learnCarouselDots');
 
     let currentIndex = 0;
     const AUTO_PLAY_MS = 4500;
@@ -394,11 +393,21 @@ function initLearnCarousel() {
         });
     }
 
+    function updateDots() {
+        if (!dotsContainer) return;
+        const dots = dotsContainer.querySelectorAll('.learn-carousel-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === currentIndex);
+            dot.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
+        });
+    }
+
     function goTo(index) {
         currentIndex = (index + total) % total;
         const w = viewport.offsetWidth;
         track.style.transform = `translateX(-${currentIndex * w}px)`;
         updateCardStates();
+        updateDots();
     }
 
     function startAutoPlay() {
@@ -418,8 +427,17 @@ function initLearnCarousel() {
     carousel.addEventListener('mouseenter', stopAutoPlay);
     carousel.addEventListener('mouseleave', startAutoPlay);
 
-    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+    if (dotsContainer) {
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'learn-carousel-dot' + (i === 0 ? ' is-active' : '');
+            dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+            dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
 
     /* Свайп на мобильных */
     let touchStartX = 0;
@@ -442,6 +460,7 @@ function initLearnCarousel() {
 
     updateLayout();
     updateCardStates();
+    updateDots();
     goTo(0);
     startAutoPlay();
 }
