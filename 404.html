@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=2.0.0">
+    <meta name="theme-color" content="#050506">
     <style>
         .page-404 {
             min-height: 100vh;
@@ -48,10 +49,25 @@
             line-height: 1.6;
             margin-bottom: 32px;
         }
-        .page-404 .btn-primary {
+        .page-404 .btn-primary,
+        .page-404 .btn-secondary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
+        }
+        .page-404-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .page-404 .btn-secondary {
+            border-color: var(--border-strong);
+            color: var(--text-primary);
+        }
+        .page-404 .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
         .header-404 .container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
         .header-404 .logo { color: var(--white); }
@@ -74,18 +90,19 @@
             <p class="page-404-desc">
                 Запрашиваемая страница не существует или была перемещена.
             </p>
-            <a href="index.html" class="btn-primary">
-                На главную
-            </a>
+            <div class="page-404-actions">
+                <a href="index.html" class="btn-primary">На главную</a>
+                <a href="index.html#contact" class="btn-secondary">Связаться</a>
+            </div>
         </div>
     </main>
     <footer class="footer">
         <div class="container footer-content">
-            <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
-            <div class="footer-links">
-                <a href="https://t.me/YaroshNikita" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-                <a href="mailto:yarosh.nv@yandex.ru" aria-label="Email">Email</a>
+            <div class="footer-actions">
+                <a href="https://t.me/YaroshNikita" class="footer-action" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+                <a href="mailto:yarosh.nv@yandex.ru" class="footer-action" aria-label="Email">Email</a>
             </div>
+            <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
         </div>
     </footer>
 </body>

@@ -158,7 +158,7 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="container header-content">
+        <div class="header-content">
             <a href="#" class="logo">
                 <span class="logo-icon">&lt;/&gt;</span>
                 <span>Ярош Никита</span>
@@ -168,11 +168,10 @@
                     <li><a href="#about">Обо мне</a></li>
                     <li><a href="#expertise">Экспертиза</a></li>
                     <li><a href="#experience">Опыт</a></li>
-                    <li><a href="#learning">Обучение</a></li>
+                    <li><a href="#learning">Образование</a></li>
                     <li><a href="#contact" class="mobile-contact-link">Связаться</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <a href="#contact" class="btn-contact">Связаться</a>
                     <button class="mobile-menu-btn hamburger" type="button" aria-label="Меню">
                         <span></span>
                         <span></span>
@@ -213,12 +212,8 @@
                         <span class="badge badge-ai">AI Integration</span>
                     </div>
                     <div class="hero-actions fade-in">
-                        <a href="#contact" class="btn-primary">
-                            Обсудить проект
-                        </a>
-                        <a href="a7f3e9d2_resume.pdf" class="btn-secondary" download>
-                            Скачать резюме
-                        </a>
+                        <a href="#contact" class="btn-primary">Обсудить проект</a>
+                        <a href="a7f3e9d2_resume.pdf" class="btn-secondary" id="heroResumeLink" download>Скачать резюме</a>
                     </div>
                 </div>
                 <div class="hero-code fade-in">
@@ -230,7 +225,9 @@
                         </div>
                         <span class="code-title mono">DeveloperProfile.java</span>
                     </div>
-                    <div class="code-content mono" id="typewriterCode"></div>
+                    <div class="code-content mono" id="typewriterCode" lang="en" aria-label="Code snippet">
+                        <div class="code-skeleton" id="codeSkeleton" aria-hidden="true"><span class="code-skeleton-line"></span><span class="code-skeleton-line"></span><span class="code-skeleton-line"></span></div>
+                    </div>
                     <div class="code-status">
                         <span class="status-indicator"></span>
                         <span class="mono">Open for Work / Freelance</span>
@@ -243,7 +240,7 @@
     <!-- Expertise (Competencies + Skills merged) -->
     <section class="expertise" id="expertise">
         <div class="container">
-            <div class="section-title fade-in" data-num="02">
+            <div class="section-title fade-in section-title-stagger" data-num="02">
                 <span class="section-num mono">02</span>
                 <h2>Экспертиза</h2>
                 <p>Направления работы и технологический стек</p>
@@ -323,7 +320,7 @@
     <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="container">
-            <div class="section-title fade-in" data-num="03">
+            <div class="section-title fade-in section-title-stagger" data-num="03">
                 <span class="section-num mono">03</span>
                 <h2>Опыт</h2>
                 <p>Профессиональный путь и достижения</p>
@@ -332,14 +329,14 @@
             <!-- VTB Bank -->
             <div class="timeline-company-block fade-in">
                 <div class="timeline-company-header">
-                    <span class="timeline-company-name">Банк ВТБ (ПАО)</span>
+                    <h3 class="timeline-company-name">Банк ВТБ (ПАО)</h3>
                     <span class="timeline-company-period">Июнь 2023 — Наст. время</span>
                 </div>
 
                 <!-- Project 1: ЦФА -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
-                        <span class="project-name">Платформа Цифровых Финансовых Активов (ЦФА)</span>
+                        <h4 class="project-name">Платформа Цифровых Финансовых Активов (ЦФА)</h4>
                     </div>
                     <div class="project-stack">
                         <span class="tech-tag">Java 21</span>
@@ -359,12 +356,12 @@
                             <li>Подключил метрики Prometheus и вывел их в Grafana</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
                 <!-- Project 2: Система бизнес-планирования -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
-                        <span class="project-name">Система Бизнес-Планирования</span>
+                        <h4 class="project-name">Система Бизнес-Планирования</h4>
                     </div>
                     <div class="project-stack">
                         <span class="tech-tag">Java 11</span>
@@ -383,20 +380,20 @@
                             <li>Выполнил перенос процедур и функций с Oracle PL/SQL на PostgreSQL PL/pgSQL</li>
                         </ul>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- IC Tavrida -->
             <div class="timeline-company-block fade-in">
                 <div class="timeline-company-header">
-                    <span class="timeline-company-name">ООО "ИЦ Таврида"</span>
+                    <h3 class="timeline-company-name">ООО "ИЦ Таврида"</h3>
                     <span class="timeline-company-period">Июль 2022 — Июнь 2023</span>
                 </div>
 
                 <!-- Project 1: AI для ТЗ -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
-                        <span class="project-name">AI-продукт для автоматизации ТЗ</span>
+                        <h4 class="project-name">AI-продукт для автоматизации ТЗ</h4>
                     </div>
                     <div class="project-stack">
                         <span class="tech-tag">Java 17</span>
@@ -416,12 +413,12 @@
                             <li>Успешно интегрировал AI-решение в сторонний продукт компании</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
                 <!-- Project 2: Платформа бизнес-решений -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
-                        <span class="project-name">Платформа для формирования бизнес-решений</span>
+                        <h4 class="project-name">Платформа для формирования бизнес-решений</h4>
                     </div>
                     <div class="project-stack">
                         <span class="tech-tag">Java 11/17</span>
@@ -440,34 +437,28 @@
                             <li>Реализовал сквозной сервис авторизации и аутентификации на базе Spring Security и Keycloak</li>
                         </ul>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Learning Section — карусель с логотипами -->
+    <!-- Образование — карусель с точками -->
     <section class="learning" id="learning">
         <div class="container">
-            <div class="section-title fade-in" data-num="04">
+            <div class="section-title fade-in section-title-stagger" data-num="04">
                 <span class="section-num mono">04</span>
-                <h2>Обучение</h2>
-                <p>Листайте карусель — в карточке сразу видна вся информация</p>
+                <h2>Образование</h2>
+                <p>Дипломы и сертификаты</p>
             </div>
 
-            <div class="learn-carousel" data-carousel>
-                <button type="button" class="learn-carousel-btn learn-carousel-prev" aria-label="Предыдущая карточка">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-                <button type="button" class="learn-carousel-btn learn-carousel-next" aria-label="Следующая карточка">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
+            <div class="learn-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Образование">
                 <div class="learn-carousel-viewport">
                     <div class="learn-carousel-track">
                 <!-- КФУ — Магистр -->
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-kfu" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">ФТИ КФУ</span>
                         </span>
                         <span class="learn-label">Информатика и вычислительная техника</span>
@@ -487,7 +478,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-kfu" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://moodle.cfuv.ru/pluginfile.php/1258513/course/overviewfiles/gerb-kfu.jpg" alt="ФТИ КФУ" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">ФТИ КФУ</span>
                         </span>
                         <span class="learn-label">Программная инженерия</span>
@@ -507,7 +498,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-mipt" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">МФТИ</span>
                         </span>
                         <span class="learn-label">Java разработчик Pro</span>
@@ -528,7 +519,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-mipt" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">МФТИ</span>
                         </span>
                         <span class="learn-label">Технологии программирования и ОС</span>
@@ -548,7 +539,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-mipt" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://edu.mipt.ru/wp-content/themes/edumipt/img/mipt-soc.png" alt="МФТИ" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">МФТИ</span>
                         </span>
                         <span class="learn-label">Технологии программирования на Java</span>
@@ -568,7 +559,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-innopolis" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://static.tildacdn.com/tild3932-3438-4836-a131-656564373437/Frame_4.png" alt="Университет Иннополис" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://static.tildacdn.com/tild3932-3438-4836-a131-656564373437/Frame_4.png" alt="Университет Иннополис" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">Иннополис</span>
                         </span>
                         <span class="learn-label">Технологии ИИ и анализа данных</span>
@@ -588,7 +579,7 @@
                 <article class="learn-card fade-in" data-learn data-carousel-item>
                     <div class="learn-card-head">
                         <span class="learn-logo learn-logo-statoplan" aria-hidden="true">
-                            <img class="learn-logo-img" src="https://yt3.googleusercontent.com/ytc/AIdro_kaE582y0VJQWAucblcFBZzGPX5ieKOO_dh0feS5lUKjSw=s900-c-k-c0x00ffffff-no-rj" alt="Стратоплан" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
+                            <img class="learn-logo-img" src="https://yt3.googleusercontent.com/ytc/AIdro_kaE582y0VJQWAucblcFBZzGPX5ieKOO_dh0feS5lUKjSw=s900-c-k-c0x00ffffff-no-rj" alt="Стратоплан" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible')">
                             <span class="learn-logo-fallback">Стратоплан</span>
                         </span>
                         <span class="learn-label">Управление техническими командами</span>
@@ -608,6 +599,7 @@
                 </article>
                     </div>
                 </div>
+                <div class="learn-carousel-dots" id="learnCarouselDots" aria-label="Переключение слайдов"></div>
             </div>
         </div>
     </section>
@@ -618,17 +610,17 @@
     <footer class="footer" id="contact">
         <div class="container footer-content">
             <div class="footer-actions">
-                <a href="https://t.me/YaroshNikita" class="footer-action" target="_blank" rel="noopener" aria-label="Telegram">
+                <a href="https://t.me/YaroshNikita" class="footer-action" id="telegramLink" target="_blank" rel="noopener" aria-label="Telegram">
                     <span class="footer-action-icon">✈️</span>
                     <span>Telegram</span>
                 </a>
                 <a href="mailto:yarosh.nv@yandex.ru" class="footer-action footer-email" id="emailLink" aria-label="Email">
                     <span class="footer-action-icon">📧</span>
-                    <span>yarosh.nv@yandex.ru</span>
+                    <span id="emailLinkText">yarosh.nv@yandex.ru</span>
                 </a>
-                <a href="a7f3e9d2_resume.pdf" class="footer-action footer-action-cta" download>
+                <a href="a7f3e9d2_resume.pdf" class="footer-action footer-action-cta" id="resumeLink" download data-resume-text="Скачать резюме (PDF)">
                     <span class="footer-action-icon">📄</span>
-                    <span>Скачать резюме (PDF)</span>
+                    <span class="resume-link-text">Скачать резюме (PDF)</span>
                 </a>
             </div>
             <p class="footer-text">© 2026 Ярош Никита. Java Backend Developer</p>
