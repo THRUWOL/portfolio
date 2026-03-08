@@ -274,7 +274,7 @@ const CODE_LINES = [
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Java 21"</span>, <span class="string">"Spring Boot"</span>,', delay: 1800 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostgreSQL"</span>, <span class="string">"AI/ML"</span>', delay: 2100 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;);', delay: 2400 },
-    { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setExperience</span>(<span class="string">"3+ года"</span>);', delay: 2700 },
+    { text: '&nbsp;&nbsp;&nbsp;&nbsp;nikita.<span class="method">setExperience</span>(<span class="string">"4+ года"</span>);', delay: 2700 },
     { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Open for freelance opportunities</span>', delay: 3000 },
     { text: '&nbsp;&nbsp;}', delay: 3300 },
     { text: '}', delay: 3600 }
@@ -530,7 +530,7 @@ function initLearnCarousel() {
 
 /* Скелетон логотипов обучения: показывать fallback до загрузки img */
 function initLearningLogos() {
-    document.querySelectorAll('.learn-logo').forEach(logo => {
+    document.querySelectorAll('.learn-logo, .learn-tab-logo').forEach(logo => {
         const img = logo.querySelector('.learn-logo-img');
         const fallback = logo.querySelector('.learn-logo-fallback');
         if (!img || !fallback) return;
@@ -542,6 +542,93 @@ function initLearningLogos() {
         img.addEventListener('error', () => {
             fallback.classList.add('is-visible');
             logo.classList.add('img-loaded');
+        });
+    });
+}
+
+/* ============================================
+   LEARNING — клик по строке открывает модалку с деталями
+   ============================================ */
+function initLearnGridModal() {
+    const modal = document.getElementById('learnModal');
+    const backdrop = document.getElementById('learnModalBackdrop');
+    const closeBtn = document.getElementById('learnModalClose');
+    const titleEl = document.getElementById('learnModalTitle');
+    const bodyEl = document.getElementById('learnModalBody');
+    const items = document.querySelectorAll('.learn-tab-item');
+    if (!modal || !bodyEl || !titleEl) return;
+
+    function openModal(item) {
+        const detail = item.querySelector('.learn-tab-detail');
+        const titleNode = item.querySelector('.learn-tab-text strong');
+        if (!detail || !titleNode) return;
+        titleEl.textContent = titleNode.textContent.trim();
+        bodyEl.innerHTML = '';
+        const clone = detail.cloneNode(true);
+        clone.hidden = false;
+        clone.classList.add('learn-modal-detail');
+        bodyEl.appendChild(clone);
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    items.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+            openModal(item);
+        });
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(item);
+            }
+        });
+    });
+    if (backdrop) backdrop.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+}
+
+/* ============================================
+   LEARNING — Вариант B: Табы
+   ============================================ */
+function initLearnTabs() {
+    const tabList = document.querySelector('.learn-tabs');
+    if (!tabList) return;
+    const buttons = tabList.querySelectorAll('.learn-tab-btn');
+    const panels = tabList.querySelectorAll('.learn-tab-panel');
+    if (!buttons.length || !panels.length) return;
+
+    buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('aria-controls');
+            const panel = document.getElementById(targetId);
+            if (!panel) return;
+            buttons.forEach(b => {
+                b.classList.remove('is-active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-selected', 'true');
+            panels.forEach(p => {
+                p.classList.remove('is-visible');
+                p.hidden = true;
+            });
+            panel.classList.add('is-visible');
+            panel.hidden = false;
         });
     });
 }
@@ -577,9 +664,12 @@ function initKeyboardNavigation() {
             const navLinks = document.querySelector(`.${CONFIG.SELECTORS.NAV_LINKS}`);
             const hamburger = document.querySelector(`.${CONFIG.SELECTORS.HAMBURGER}`);
             const navActions = document.querySelector(`.${CONFIG.SELECTORS.NAV_ACTIONS}`);
+            const overlay = document.getElementById('mobileOverlay');
             if (navLinks) navLinks.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (hamburger) hamburger.classList.remove(CONFIG.CLASSES.ACTIVE);
             if (navActions) navActions.classList.remove(CONFIG.CLASSES.ACTIVE);
+            if (overlay) overlay.classList.remove(CONFIG.CLASSES.ACTIVE);
+            document.body.style.overflow = '';
 
             const openCard = document.querySelector('.learn-card.is-open');
             if (openCard) {
@@ -588,6 +678,12 @@ function initKeyboardNavigation() {
                     openCard.classList.remove('is-open');
                     head.setAttribute('aria-expanded', 'false');
                 }
+            }
+            const learnModal = document.getElementById('learnModal');
+            if (learnModal && learnModal.classList.contains('is-open')) {
+                learnModal.classList.remove('is-open');
+                learnModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
             }
         }
     });
@@ -696,6 +792,8 @@ function init() {
     initEmailCopy();
     initResumeFeedback();
     initLearnCarousel();
+    initLearnGridModal();
+    initLearnTabs();
     initLearningLogos();
     initLearnCards();
     initFadeInAnimation();
