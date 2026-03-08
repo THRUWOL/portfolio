@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Персональное портфолио Java Backend разработчика с 3+ годами коммерческого опыта.
+Персональное портфолио Java Backend разработчика с 4+ годами коммерческого опыта.
 
 🌐 **Сайт:** [yaroshnikita.online](https://yaroshnikita.online)
 
