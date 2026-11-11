@@ -84,3 +84,9 @@ temp/
 *.pem
 *.crt
 secrets/
+.aider*
+
+# Recovered Unity sources (local only)
+shakhtino/_creature_decomp/
+**/_decomp_src/
+
